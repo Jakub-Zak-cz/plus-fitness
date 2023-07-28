@@ -7,332 +7,332 @@
     <title>Document</title>
     <style>
         /** main styles for excact pages */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    box-sizing: border-box;
-}
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            box-sizing: border-box;
+        }
 
-:root {
-    /** colors */
-    --main-color: #141414;
-    --secondary-color: #fff;
-    --accent-color : #E60F88;
-    /** typography */
-    --title : 60px;
-    --headline : 36px;
-    --middle-text : 30px;
-    --visible-b-text : 20px;
-    --body-text : 16px;
-    /** fonts */
-    --montserrat: 'Montserrat', sans-serif; 
-}
+        :root {
+            /** colors */
+            --main-color: #141414;
+            --secondary-color: #fff;
+            --accent-color : #E60F88;
+            /** typography */
+            --title : 60px;
+            --headline : 36px;
+            --middle-text : 30px;
+            --visible-b-text : 20px;
+            --body-text : 16px;
+            /** fonts */
+            --montserrat: 'Montserrat', sans-serif; 
+        }
 
-.container {
-    max-width: 1300px;
-    width: 90%;
-    margin: 0 auto;
-}
+        .container {
+            max-width: 1300px;
+            width: 90%;
+            margin: 0 auto;
+        }
 
-.shadow {
-    box-shadow: 0px -15px 14px 0px rgba(0, 0, 0, 0.25) inset;
-}
+        .shadow {
+            box-shadow: 0px -15px 14px 0px rgba(0, 0, 0, 0.25) inset;
+        }
 
-h1, h2, h3 , h4, h5, h6 {
-    font-weight: 400;
-}
+        h1, h2, h3 , h4, h5, h6 {
+            font-weight: 400;
+        }
 
-p {
-    font-size: var(--body-text);
-}
+        p {
+            font-size: var(--body-text);
+        }
 
-body {
-    background: var(--main-color);
-    color: var(--secondary-color);
-    font-family: var(--montserrat);
-}
+        body {
+            background: var(--main-color);
+            color: var(--secondary-color);
+            font-family: var(--montserrat);
+        }
 
-#primary-header {
-    padding: 25px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    background: var(--accent-color);
-}
+        #primary-header {
+            padding: 25px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            background: var(--accent-color);
+        }
 
-.primary-navigation ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 22px;
-    flex-shrink: 0;
-}
+        .primary-navigation ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 22px;
+            flex-shrink: 0;
+        }
 
-/** animation of underline after hovering, on primary navigation links */
+        /** animation of underline after hovering, on primary navigation links */
 
-.primary-navigation ul li a {
-    text-decoration: none;
-    color: var(--main-color);
-    position: relative;
-}
+        .primary-navigation ul li a {
+            text-decoration: none;
+            color: var(--main-color);
+            position: relative;
+        }
 
-.primary-navigation ul li a::before, .primary-navigation ul li a::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--main-color);
-    transition: width 0.3s ease-in-out;
-}
-.primary-navigation ul li a::before {
-    left: 50%;
-    transform: translateX(-50%);
-}
-.primary-navigation ul li a::after {
-    right: 50%;
-    transform: translateX(50%);
-}
-.primary-navigation ul li a:hover::before, .primary-navigation ul li a:hover::after {
-    width: 100%;
-}
+        .primary-navigation ul li a::before, .primary-navigation ul li a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--main-color);
+            transition: width 0.3s ease-in-out;
+        }
+        .primary-navigation ul li a::before {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .primary-navigation ul li a::after {
+            right: 50%;
+            transform: translateX(50%);
+        }
+        .primary-navigation ul li a:hover::before, .primary-navigation ul li a:hover::after {
+            width: 100%;
+        }
 
-.current_page_item a::after {
-    transition: none !important;
-    content: "" !important;
-    position: absolute !important;
-    bottom: 0 !important;
-    width: 100% !important;
-    height: 2px !important;
-    background-color: var(--main-color) !important;
-}
+        .current_page_item a::after {
+            transition: none !important;
+            content: "" !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            width: 100% !important;
+            height: 2px !important;
+            background-color: var(--main-color) !important;
+        }
 
-/** code for reusable buttons */
-.btn {
-    text-decoration: none;
-    display: flex;
-    padding: 15px 40px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    background: var(--accent-color);
-    color: var(--main-color);
-    transition: box-shadow 0.3s ease-in-out;
-}
+        /** code for reusable buttons */
+        .btn {
+            text-decoration: none;
+            display: flex;
+            padding: 15px 40px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-color);
+            color: var(--main-color);
+            transition: box-shadow 0.3s ease-in-out;
+        }
 
-.btn:hover {
-    box-shadow: 0px -10px 10px 0px rgba(0, 0, 0, 0.5) inset; 
-}
+        .btn:hover {
+            box-shadow: 0px -10px 10px 0px rgba(0, 0, 0, 0.5) inset; 
+        }
 
-.no-btn {
-    background: transparent;
-    color: var(--secondary-color);
-}
+        .no-btn {
+            background: transparent;
+            color: var(--secondary-color);
+        }
 
-.no-btn:hover {
-    box-shadow: none;
-    border: 1px solid var(--accent-color);
-}
+        .no-btn:hover {
+            box-shadow: none;
+            border: 1px solid var(--accent-color);
+        }
 
-/** home page code */
-/** hero section */
-.hero-section {
-    background: url('../img/fitness_hero-img.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    align-items: flex-start;
-    height: 90vh;
-}
+        /** home page code */
+        /** hero section */
+        .hero-section {
+            background: url('../img/fitness_hero-img.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: flex-start;
+            height: 90vh;
+        }
 
-.hero-section .container {
-    margin-top: 25vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 25px;
-}
+        .hero-section .container {
+            margin-top: 25vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 25px;
+        }
 
-.title {
-    font-size: var(--title);
-    margin-bottom: 25px;
-    max-width: 15ch;
-}
+        .title {
+            font-size: var(--title);
+            margin-bottom: 25px;
+            max-width: 15ch;
+        }
 
-.under-title {
-    font-size: var(--body-text);
-    line-height: 20px;
-    max-width: 35ch;
-}
+        .under-title {
+            font-size: var(--body-text);
+            line-height: 20px;
+            max-width: 35ch;
+        }
 
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-}
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
 
-/** why-us section */
-.why-us {
-    padding: 100px 0;
-}
+        /** why-us section */
+        .why-us {
+            padding: 100px 0;
+        }
 
-.why-us .container {
-    display: flex;
-    gap: 20px;
-}
+        .why-us .container {
+            display: flex;
+            gap: 20px;
+        }
 
-.why {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 25px;
-    width: 33%;
-}
+        .why {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 25px;
+            width: 33%;
+        }
 
-.why figure {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+        .why figure {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-.why-us_caption {
-    font-size: var(--visible-b-text);
-}
+        .why-us_caption {
+            font-size: var(--visible-b-text);
+        }
 
-.why-text {
-    font-size: var(--body-text);
-    max-width: 35ch;
-}
+        .why-text {
+            font-size: var(--body-text);
+            max-width: 35ch;
+        }
 
-/** about-us */
-.main_about-us {
-    padding: 80px 0;
-}
+        /** about-us */
+        .main_about-us {
+            padding: 80px 0;
+        }
 
-.main_about-us .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+        .main_about-us .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.about-us_text {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-}
+        .about-us_text {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
 
-.about-us_image {
-    width: 526.262px; 
-}
+        .about-us_image {
+            width: 526.262px; 
+        }
 
-.about-us_title {
-    font-size: var(--headline);
-}
+        .about-us_title {
+            font-size: var(--headline);
+        }
 
-.about-us_title b {
-    color: var(--accent-color);
-}
+        .about-us_title b {
+            color: var(--accent-color);
+        }
 
-.about-us_paragraph {
-    max-width: 50ch;
-}
+        .about-us_paragraph {
+            max-width: 50ch;
+        }
 
-/** media queries */
-@media (max-width: 900px) {
-    
-    /** about-us */
-    .main_about-us .container {
-        flex-direction: column;
-        gap: 50px;
-    }
+        /** media queries */
+        @media (max-width: 900px) {
+            
+            /** about-us */
+            .main_about-us .container {
+                flex-direction: column;
+                gap: 50px;
+            }
 
-    .about-us_text {
-        width: 100%;
-    }
+            .about-us_text {
+                width: 100%;
+            }
 
-    .about-us_image {
-        width: 100%;
-    }
-}
+            .about-us_image {
+                width: 100%;
+            }
+        }
 
-@media (max-width: 768px) {
-    
-    /** root */
-    :root {
-       /** typography */
-        --title : 50px;
-        --headline : 30px;
-        --middle-text : 26px;
-        --visible-b-text : 18px;
-        --body-text : 16px; 
-    }
+        @media (max-width: 768px) {
+            
+            /** root */
+            :root {
+            /** typography */
+                --title : 50px;
+                --headline : 30px;
+                --middle-text : 26px;
+                --visible-b-text : 18px;
+                --body-text : 16px; 
+            }
 
-    /** why-us */
-    .why-us .container {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
+            /** why-us */
+            .why-us .container {
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
 
-    .why {
-        width: 60%;
-    }
+            .why {
+                width: 60%;
+            }
 
 
-}
+        }
 
-@media (max-width: 600px) {
-    /** root */
-    :root {
-       /** typography */
-        --title : 44px;
-        --headline : 28px;
-        --middle-text : 24px;
-        --visible-b-text : 18px;
-        --body-text : 16px; 
-    }
-}
+        @media (max-width: 600px) {
+            /** root */
+            :root {
+            /** typography */
+                --title : 44px;
+                --headline : 28px;
+                --middle-text : 24px;
+                --visible-b-text : 18px;
+                --body-text : 16px; 
+            }
+        }
 
-@media (max-width: 480px) {
-    /** root */
-    :root {
-       /** typography */
-        --title : 36px;
-        --headline : 26px;
-        --middle-text : 22px;
-        --visible-b-text : 16px;
-        --body-text : 14px; 
-    }
+        @media (max-width: 480px) {
+            /** root */
+            :root {
+            /** typography */
+                --title : 36px;
+                --headline : 26px;
+                --middle-text : 22px;
+                --visible-b-text : 16px;
+                --body-text : 14px; 
+            }
 
-    /** hero section */
-    /* .hero-section .container {
-        align-items: center;
-        justify-content: center;
-    } */
+            /** hero section */
+            /* .hero-section .container {
+                align-items: center;
+                justify-content: center;
+            } */
 
-    .hero-buttons {
-        flex-direction: column;
-    }
+            .hero-buttons {
+                flex-direction: column;
+            }
 
-    .hero-buttons .btn {
-        width: 100%;
-    }
+            .hero-buttons .btn {
+                width: 100%;
+            }
 
-    .why-us .container {
-        gap: 40px;
-    }
+            .why-us .container {
+                gap: 40px;
+            }
 
-    .why {
-        width: 100%;
-    }
+            .why {
+                width: 100%;
+            }
 
-} 
+        } 
     </style>
 </head>
 <body>
@@ -356,15 +356,15 @@ body {
                 <div class="trainer swiper-slide swiper-slide-prev" style="width: 413.333px; margin-right: 30px;" role="group" aria-label="1 / 5">
                     <div class="trainers-image-wrapper">
                     
-                                            <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Rectangle-21-1.png" alt="Lenka Hanzlíková">
-                                            <div class="trainers-image-showup">
+                        <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Rectangle-21-1.png" alt="Lenka Hanzlíková">
+                        <div class="trainers-image-showup">
                             
                             <ul class="trainers-list">
-                                                            <li class="trainers-list_item">trampolíny</li>
-                                                            <li class="trainers-list_item">spinning</li>
-                                                        </ul>
+                                <li class="trainers-list_item">trampolíny</li>
+                                <li class="trainers-list_item">spinning</li>
+                            </ul>
 
-                                                    <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
+                            <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
                          
                         
                         </div>
@@ -381,17 +381,17 @@ body {
                 <div class="trainer swiper-slide swiper-slide-active" style="width: 413.333px; margin-right: 30px;" role="group" aria-label="2 / 5">
                     <div class="trainers-image-wrapper">
                     
-                                            <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Rectangle-19.png" alt="Michal Vácha">
-                                            <div class="trainers-image-showup">
+                        <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Rectangle-19.png" alt="Michal Vácha">
+                        <div class="trainers-image-showup">
                             
                             <ul class="trainers-list">
-                                                            <li class="trainers-list_item">Kulturistika</li>
-                                                            <li class="trainers-list_item">Fitness</li>
-                                                            <li class="trainers-list_item">Kondička</li>
-                                                            <li class="trainers-list_item">Kruhový Trénink</li>
-                                                        </ul>
+                                <li class="trainers-list_item">Kulturistika</li>
+                                <li class="trainers-list_item">Fitness</li>
+                                <li class="trainers-list_item">Kondička</li>
+                                <li class="trainers-list_item">Kruhový Trénink</li>
+                            </ul>
 
-                                                    <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
+                            <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
                          
                         
                         </div>
@@ -408,16 +408,16 @@ body {
                 <div class="trainer swiper-slide swiper-slide-next" style="width: 413.333px; margin-right: 30px;" role="group" aria-label="3 / 5">
                     <div class="trainers-image-wrapper">
                     
-                                            <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Group-16.png" alt="Michal Trykar">
-                                            <div class="trainers-image-showup">
+                        <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Group-16.png" alt="Michal Trykar">
+                        <div class="trainers-image-showup">
                             
                             <ul class="trainers-list">
-                                                            <li class="trainers-list_item">Kulturistika</li>
-                                                            <li class="trainers-list_item">Fitness</li>
-                                                            <li class="trainers-list_item">Kondička</li>
-                                                        </ul>
+                                <li class="trainers-list_item">Kulturistika</li>
+                                <li class="trainers-list_item">Fitness</li>
+                                <li class="trainers-list_item">Kondička</li>
+                            </ul>
 
-                                                    <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
+                            <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
                          
                         
                         </div>
@@ -434,16 +434,16 @@ body {
                 <div class="trainer swiper-slide" style="width: 413.333px; margin-right: 30px;" role="group" aria-label="4 / 5">
                     <div class="trainers-image-wrapper">
                     
-                                            <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Group-16-1.png" alt="Petra Řípová">
-                                            <div class="trainers-image-showup">
+                        <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Group-16-1.png" alt="Petra Řípová">
+                        <div class="trainers-image-showup">
                             
                             <ul class="trainers-list">
-                                                            <li class="trainers-list_item">Pevné Tělo</li>
-                                                            <li class="trainers-list_item">BodyForming</li>
-                                                            <li class="trainers-list_item">Spalovačka</li>
-                                                        </ul>
+                                <li class="trainers-list_item">Pevné Tělo</li>
+                                <li class="trainers-list_item">BodyForming</li>
+                                <li class="trainers-list_item">Spalovačka</li>
+                            </ul>
 
-                                                    <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
+                            <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
                          
                         
                         </div>
@@ -460,17 +460,17 @@ body {
                 <div class="trainer swiper-slide" role="group" aria-label="5 / 5" style="width: 413.333px; margin-right: 30px;">
                     <div class="trainers-image-wrapper">
                     
-                                            <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Group-16-2.png" alt="Pepa Polka">
-                                            <div class="trainers-image-showup">
-                            
-                            <ul class="trainers-list">
-                                                            <li class="trainers-list_item">Spinning</li>
-                                                        </ul>
-
-                                                    <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
-                         
+                        <img src="http://localhost/+fitness/wp-content/uploads/2023/07/Group-16-2.png" alt="Pepa Polka">
+                        <div class="trainers-image-showup">
                         
-                        </div>
+                            <ul class="trainers-list">
+                                <li class="trainers-list_item">Spinning</li>
+                            </ul>
+
+                            <a target="_blank" class="trainers-link btn white-btn" href="#">Více informací -&gt;</a>
+                        
+                    
+                            </div>
                 
                     </div>
 
@@ -490,21 +490,21 @@ body {
 
     <script>
         /*
-* Swiper 
-*/
-var swiper = new Swiper(".trainers", {
-    slidesPerView: 1,
-    spaceBetween: 30,
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    breakpoints: {
-        900: {
-            slidesPerView: 3,
-        },
-    },
-});
+        * Swiper 
+        */
+        var swiper = new Swiper(".trainers", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                900: {
+                    slidesPerView: 3,
+                },
+            },
+        });
     </script>
 
 </body>

@@ -13,6 +13,7 @@
     --secondary-color: #fff;
     --accent-color : #E60F88;
     --accent-color-rgb : 230, 15, 136;
+    --black-bg : #0C0C0C;
     /** typography */
     --title : 60px;
     --headline : 36px;
@@ -39,6 +40,11 @@ h1, h2, h3 , h4, h5, h6 {
 
 p {
     font-size: var(--body-text);
+    line-height: 22px;
+}
+
+figure {
+    margin: 0 0 0 0;
 }
 
 body {
@@ -47,10 +53,19 @@ body {
     font-family: var(--montserrat);
 }
 
+.accent-text {
+    color: var(--accent-color);
+    font-weight: 400;
+}
+
 /** swiper */
 .swiper {
     width: 100%;
     height: 100%;
+}
+
+.reviews_slider {
+    height: 370px;
 }
 
 .swiper-slide {
@@ -74,6 +89,27 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.review img  {
+    width: 132px;
+    height: 132px;
+    object-fit: unset;
+    flex-shrink: 0;
+}
+
+.gallery-slide img {
+    /* min-width: 30vw;
+    height: 680px; */
+    object-fit: unset;
+    flex-shrink: 0;
+    border: 2px solid var(--accent-color);
+}
+
+.gallery-title {
+    font-size: var(--headline);
+    text-align: center;
+    margin-bottom: 50px;
 }
 
 /** arrows */
@@ -103,7 +139,7 @@ body {
 /**trainers swiper */
 /**text */
 .custom-trainers {
-    padding: 100px;
+    padding: 100px 0;
     position: relative;
 }
 
@@ -116,11 +152,6 @@ body {
 
 .custom-trainers_title {
     font-size: var(--headline);
-}
-
-.custom-trainers_title b {
-    color: var(--accent-color);
-    font-weight: 400;
 }
 
 .custom-trainers_undertitle {
@@ -176,6 +207,125 @@ body {
     padding: 15px 10px;
 }
 
+
+/** reviews slider */
+.reviews {
+    padding: 180px 0;
+}
+
+.reviews-introduction {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 50px;
+}
+
+.reviews_title {
+    font-size: var(--headline);
+    text-align: center;
+}
+
+.reviews_paragraph {
+    text-align: center;
+    max-width: 75ch;
+}
+
+.reviews_paragraph a {
+    color: var(--accent-color);
+}
+
+.review {
+    display: flex!important;
+    width: 100%!important;
+    padding: 80px 116px;
+    align-items: flex-start;
+    gap: 20px;
+    border-radius: 30px;
+    background: var(--black-bg);
+}
+
+.reviews_text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.reviews_text p {
+    font-size: var(--body-text);
+    text-align: initial;
+}
+
+.reviews-headline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.reviews-headline h3 {
+    font-size: var(--middle-text);
+}
+
+.review-figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.reviews-approval {
+    flex-shrink: 0!important;
+    width: 40px!important;
+    height: 42.817px!important;
+    display: inline-block !important;
+    position: relative;
+}
+
+.review-figure figcaption {
+    font-size: var(--body-text);
+    display: inline;
+}
+
+.reviews-pagination {
+    color: var(--accent-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.swiper-pagination-bullet {
+    background: var(--accent-color)!important;
+}
+
+.swiper-pagination-vertical.swiper-pagination-bullets,
+.swiper-vertical > .swiper-pagination-bullets {
+    right: initial !important; 
+    top: unset!important;
+    left: 50% !important; 
+    bottom: 30px !important; 
+    transform: translateX(-50%) translateY(0) !important; 
+}
+
+/** gallery */
+.fitness-gallery {
+    padding: 120px 0;
+}
+
+.fitness-gallery .container {
+    position: relative;
+}
+
+.gallery-button-next {
+    right: -5% !important;
+}
+
+.gallery-button-prev {
+    left: -5% !important;
+}
 
 /** end of swiper */
 
@@ -409,6 +559,31 @@ body {
     .trainers-image-wrapper:hover, .trainers-image-wrapper:active > .trainers-image-showup {
         top: 0; 
     }
+
+    /** slider reviews*/
+
+    .reviews_slider {
+        height: 90vh;
+        max-height: 600px;
+    } 
+
+    .review {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 10px 50px;
+    }
+
+    .reviews-headline {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /** gallery */
+    .trainer {
+        padding: 0 40px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -461,13 +636,16 @@ body {
     }
 
     /** trainers */
-
-    .custom-trainers_title {
-        margin-bottom: 50px;
+    .trainer {
+        padding: 0 40px;
     }
 
-    .custom-trainers_undertitle {
-        display: none;
+    .swiper-button-prev {
+        left: 1px !important;
+    }
+
+    .swiper-button-next {
+        right: 1px !important;
     }
 
     .trainers-link {
@@ -483,4 +661,24 @@ body {
         width: 100%;
     }
 
+    /** reviews slider */
+    .review-figure {
+        display: none;
+    }
+
+    .reviews_slider {
+        max-height: unset;
+        height: 100vh;
+    }
+
+    .review {
+        padding: 10px 10px;
+    }
+
 } 
+
+@media (max-width: 320px) {
+    .reviews_slider {
+        height: 130vh;
+    }
+}

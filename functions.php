@@ -226,6 +226,79 @@ function fitness_customizer_settings($wp_customize) {
 
 add_action('customize_register', 'fitness_customizer_settings');
 
+/** price */
+function fitness_price_list($wp_customize) {
+    // Vytvoříme novou sekci pro ceník
+    $wp_customize->add_section('cenik', array(
+        'title' => 'Ceník', // Název sekce
+        'priority' => 30, // Pořadí sekce
+    ));
+
+    // Pole s hodnotami pro ceník pro dospělé
+    $adult_options = array(
+        'once' => 'Jednorazovy',
+        'one-month' => '1 měsíc',
+        'two-months' => '2 měsíce',
+        'three-months' => '3 měsíce',
+        'half-year' => 'Půl roku',
+        'one-year' => 'Jeden Rok',
+        '10-entries' => '10 vstupů',
+        '20-entries' => '20 vstupů',
+        '30-entries' => '30 vstupů',
+        'group' => 'Skupina',
+        'personal' => 'Osobní Trenér',
+    );
+
+    // Pole s hodnotami pro ceník pro studenty
+    $student_options = array(
+        'once-student' => 'Jednorazovy Student',
+        'one-month-student' => '1 měsíc Student',
+        'two-months-student' => '2 měsíce Student',
+        'three-months-student' => '3 měsíce Student',
+        'half-year-student' => 'Půl roku Student',
+        'one-year-student' => 'Jeden Rok Student',
+        '10-entries-student' => '10 vstupů Student',
+        '20-entries-student' => '20 vstupů Student',
+        '30-entries-student' => '30 vstupů Student',
+        'group-student' => 'Skupina Student',
+        'personal-student' => 'Osobní Trenér Student',
+    );
+
+    // Přidáme textová pole pro jednotlivé hodnoty pro ceník pro dospělé
+    foreach ($adult_options as $option_key => $option_label) {
+        $wp_customize->add_setting($option_key, array(
+            'default' => '',
+            'type' => 'option', // Uložení hodnoty jako volbu v databázi
+            'sanitize_callback' => 'sanitize_text_field', // Očištění hodnoty
+        ));
+
+        $wp_customize->add_control($option_key, array(
+            'label' => $option_label, // Popisek pole
+            'section' => 'cenik', // Sekce, do které pole patří
+            'type' => 'text', // Typ pole
+        ));
+    }
+
+    // Přidáme textová pole pro jednotlivé hodnoty pro ceník pro studenty
+    foreach ($student_options as $option_key => $option_label) {
+        $wp_customize->add_setting($option_key, array(
+            'default' => '',
+            'type' => 'option', // Uložení hodnoty jako volbu v databázi
+            'sanitize_callback' => 'sanitize_text_field', // Očištění hodnoty
+        ));
+
+        $wp_customize->add_control($option_key, array(
+            'label' => $option_label, // Popisek pole
+            'section' => 'cenik', // Sekce, do které pole patří
+            'type' => 'text', // Typ pole
+        ));
+    }
+}
+
+add_action('customize_register', 'fitness_price_list');
+
+
+
 
 /** shortcode */
 // Funkce pro vytvoření shortcode
@@ -429,3 +502,305 @@ function display_gallery() {
     return ob_get_clean();
 }
 add_shortcode('fitness_gallery', 'display_gallery');
+
+/** price list shortcode */
+function display_price_list(){
+
+    ob_start();
+    ?>
+
+    <section class="price-list" aria-labelledby="#price_title" >
+        
+        <div class="container">
+
+            <header>
+                
+                <h2 id="price_title">Kolik to u <b class="accent-text" > nás stojí</b></h2>
+
+                <span>
+                    Ceny jsou uvedeny v kreditech. 
+                    Platí 1 kredit = 1 Kč.
+                </span>
+            
+            </header>
+
+            <div class="price-list_wrapper">
+
+                <div class="price-list_controls">
+
+                    <button class="price-list__toggle active" onclick="togglePriceList(event, 'adult-price-list')">Dospělý</button>
+                    
+                    <button class="price-list__toggle" onclick="togglePriceList(event, 'student-price-list')">Studenti</button>
+
+                </div>
+
+                <div id="adult-price-list" class="price-list__content active">
+                <!-- dospele ceny -->
+
+                <?php
+                // addults
+                    $one_entry = get_option('once');
+                    $one_month = get_option('one-month');
+                    $two_months = get_option('two-months');
+                    $three_months = get_option('three-months');
+                    $half_year = get_option('half-year');
+                    $one_year = get_option('one-year');
+                    $entries_10 = get_option('10-entries');
+                    $entries_20 = get_option('20-entries');
+                    $entries_30 = get_option('30-entries');
+                    $group = get_option('group');
+                    $personal = get_option('personal');
+                ?>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Jednorázový vstup</span>
+
+                        <span class="price"><?php echo esc_html($one_entry); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">1 měsíc</span>
+
+                        <span class="price"><?php echo esc_html($one_month); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">2 měsíce</span>
+
+                        <span class="price"><?php echo esc_html($two_months); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">3 měsíce</span>
+
+                        <span class="price"><?php echo esc_html($three_months); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">6 měsíců</span>
+
+                        <span class="price"><?php echo esc_html($half_year); ?></span>
+
+                    </div> 
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">1 Rok</span>
+
+                        <span class="price"><?php echo esc_html($one_year); ?></span>
+
+                    </div>
+                    
+                    
+                    <div class="price-block">
+
+                        <span class="price-span">10 vstupů</span>
+
+                        <span class="price"><?php echo esc_html($entries_10); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">20 vstupů</span>
+
+                        <span class="price"><?php echo esc_html($entries_20); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">30 vstupů</span>
+
+                        <span class="price"><?php echo esc_html($entries_30); ?></span>
+
+                    </div>
+
+                    <div class="price-block accent-price-block">
+
+                        <span class="price-span">
+                            Skupinová cvičení
+                            s Instruktorem
+                        </span>
+
+                        <span class="price-span">za 1 hodinu</span>
+
+                        <span class="price"><?php echo esc_html($group); ?></span>
+
+                    </div>
+
+                    <div class="price-block accent-price-block">
+
+                        <span class="price-span">Cvičení s osobním trenérem</span>
+
+                        <span class="price-span">za 1 hodinu</span>
+
+                        <span class="price"><?php echo esc_html($personal); ?></span>
+
+                    </div>
+
+                </div>    
+                
+                <div id="student-price-list" class="price-list__content">
+                    <!-- studentske ceny -->
+
+                    <?php
+                    // students
+                    $one_entry_student = get_option('once-student');
+                    $one_month_student = get_option('one-month-student');
+                    $two_months_student = get_option('two-months-student');
+                    $three_months_student = get_option('three-months-student');
+                    $half_year_student = get_option('half-year-student');
+                    $one_year_student = get_option('one-year-student');
+                    $entries_10_student = get_option('10-entries-student');
+                    $entries_20_student = get_option('20-entries-student');
+                    $entries_30_student = get_option('30-entries-student');
+                    $group_student = get_option('group-student');
+                    $personal_student = get_option('personal-student');
+
+                    echo '<pre>';
+                    var_dump(get_option('once-student'));
+                    echo '</pre>';
+
+
+                    ?>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Jednorázový vstup</span>
+
+                        <span class="price"><?php echo esc_html($one_entry_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">1 měsíc</span>
+
+                        <span class="price"><?php echo esc_html($one_month_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">2 měsíce</span>
+
+                        <span class="price"><?php echo esc_html($two_months_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">3 měsíce</span>
+
+                        <span class="price"><?php echo esc_html($three_months_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">6 měsíců</span>
+
+                        <span class="price"><?php echo esc_html($half_year_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">Permanentka</span>
+
+                        <span class="price-span">1 Rok</span>
+
+                        <span class="price"><?php echo esc_html($one_year_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">10 vstupů</span>
+
+                        <span class="price"><?php echo esc_html($entries_10_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">20 vstupů</span>
+
+                        <span class="price"><?php echo esc_html($entries_20_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block">
+
+                        <span class="price-span">30 vstupů</span>
+
+                        <span class="price"><?php echo esc_html($entries_30_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block accent-price-block">
+
+                        <span class="price-span">
+                            Skupinová cvičení
+                            s Instruktorem
+                        </span>
+
+                        <span class="price-span">za 1 hodinu</span>
+
+                        <span class="price"><?php echo esc_html($group_student); ?></span>
+
+                    </div>
+
+                    <div class="price-block accent-price-block">
+
+                        <span class="price-span">Cvičení s osobním trenérem</span>
+
+                        <span class="price-span">za 1 hodinu</span>
+
+                        <span class="price"><?php echo esc_html($personal_student); ?></span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    
+    </section>
+
+    <?php
+    return ob_get_clean();
+
+} ;
+
+add_shortcode('price_list', 'display_price_list');

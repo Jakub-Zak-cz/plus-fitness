@@ -20,6 +20,15 @@ function togglePriceList(event, priceListId) {
   priceList.classList.add("active");
 }
 
+/** credit info - btn with dropdown text (same effect is used for faqs) */
+const creditBtn = document.getElementById("credit-btn");
+const creditInfo = document.querySelector(".credit-info");
+
+creditBtn.addEventListener("click", () => {
+  creditBtn.classList.toggle("open");
+});
+
+
 document.addEventListener("DOMContentLoaded", function() {
 
   // Získáme tlačítka a ceníky

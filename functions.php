@@ -517,10 +517,23 @@ function display_price_list(){
                 
                 <h2 id="price_title">Kolik to u <b class="accent-text" > nás stojí</b></h2>
 
-                <span>
+                <p>
+                    V rámci individuálního cvičení můžete využívat posilovnu, spinning, kardio a tělocvičnu.
+                    <br> Individuální cvičení je možné hradit také z benefitní karty Multisport nebo Edenred. <br>
                     Ceny jsou uvedeny v kreditech. 
                     Platí 1 kredit = 1 Kč.
-                </span>
+                </p>
+
+                <span id="credit-btn">Jak kredity uhradit -></span>
+
+                <div class="credit-info" id="credit-text">
+                    <h4>Kredity je možné uhradit:</h4>
+                    <ul>
+                        <li>a ) V hotovosti nebo platební kartou na recepci fitness.</li>
+                        <li>b ) Převodním příkazem z účtu klienta na účet: 11111 (do poznámky je třeba uvést email klienta nebo celé jméno z rezervačního systému, aby bylo možné platbu přiřadit ke konkrétnímu uživatelskému účtu).</li>
+                    </ul>
+                </div>
+
             
             </header>
 
@@ -635,7 +648,7 @@ function display_price_list(){
 
                     </div>
 
-                    <div class="price-block accent-price-block">
+                    <div class="price-block accent-price-block shadow" id="group-training" >
 
                         <span class="price-span">
                             Skupinová cvičení
@@ -676,11 +689,6 @@ function display_price_list(){
                     $entries_30_student = get_option('30-entries-student');
                     $group_student = get_option('group-student');
                     $personal_student = get_option('personal-student');
-
-                    echo '<pre>';
-                    var_dump(get_option('once-student'));
-                    echo '</pre>';
-
 
                     ?>
 

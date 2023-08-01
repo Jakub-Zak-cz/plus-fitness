@@ -13,6 +13,7 @@
     --secondary-color: #fff;
     --accent-color : #E60F88;
     --accent-color-rgb : 230, 15, 136;
+    --lighter-accent : #E847A2;
     --black-bg : #0C0C0C;
     --blue-link : #0066FF;
     /** typography */
@@ -425,7 +426,7 @@ body {
 
 .no-btn:hover {
     box-shadow: none;
-    border: 1px solid var(--accent-color);
+    border: 2px solid var(--secondary-color);
 }
 
 /** home page code */
@@ -533,7 +534,28 @@ body {
     max-width: 50ch;
 }
 
-/** cenik */
+/** price*/
+.price-list {
+    padding: 180px 0;
+}
+
+.price-list .container header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+#price_title {
+    font-size: var(--headline);
+}
+
+.price-list .container header p {
+    text-align: center;
+}
+
 .price-list__content {
     display: none;
 }
@@ -542,10 +564,172 @@ body {
     display: flex;
 }
 
-.price-list_controls .active {
-    background: var(--accent-color);
+.price-list__toggle {
+    /** unactive btn */
+    width: 18vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--middle-text);
+    font-family: var(--montserrat);
+    color: var(--secondary-color);
+    background: transparent;
+    position: relative;
 }
 
+.price-list__toggle:focus {
+    background: rgba(var(--accent-color-rgb), 0.64);
+    color: var(--main-color);
+}
+
+.price-list_controls .active {
+    /**active btn */
+    background: var(--accent-color);
+    color: var(--main-color);
+    box-shadow: 0px -20px 14px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.price-list_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.price-list_controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+.price-list__content.active {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
+}
+
+.price-block {
+    flex-basis: calc(33.33% - 10px); /* Šířka bloku - 10px odstup mezi bloky */
+    height: 295px;
+    border-radius: 10px;
+    margin-bottom: 30px; /* Odstup mezi řádky bloků */
+    background-color: var(--black-bg);
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.accent-price-block {
+    background-color: var(--lighter-accent);
+    margin-right: 50px;
+}
+
+.price-span, .price {
+    font-size: calc( var(--middle-text) - 4px );
+}
+
+.price {
+    display: block;
+    padding: 20px 24px;
+    border: 2px solid var(--accent-color);
+}
+
+.accent-price-block span {
+    color: var(--main-color);
+}
+
+.accent-price-block .price {
+    border: 2px solid var(--main-color);
+}
+
+#group-training {
+    position: relative;
+}
+
+#group-training::before {
+    content: "*Skupinová cvičení je možné hradit také z benefitní karty Multisport.";
+    position: absolute;
+    bottom: 2px; 
+    left: 5%; 
+    color: var(--main-color);
+    font-size: calc( var(--body-text) - 4px );
+    color: var(--main-color);
+}
+
+/** how to pay credit */
+.credit-info {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1.4s ease;
+}
+
+.credit-info p,
+.credit-info ul {
+  padding: 0;
+  margin: 0;
+}
+
+.credit-info ul {
+  list-style: none;
+  padding-left: 1.2rem;
+}
+
+#credit-btn {
+  cursor: pointer;
+  font-size: var(--visible-b-text);
+  color: var(--accent-color);
+  text-decoration: underline;
+}
+
+#credit-text {  
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease; /* Přidáme CSS animaci pro text */
+}
+
+#credit-text.open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; 
+  max-height: 300px; /* Nebo jakoukoliv jinou výšku potřebujete */
+  animation: fade 0.5s ease-in-out; /* Přidáme stejnou animaci jako u FAQ bloků */
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+#credit-btn.open + .credit-info {
+  max-height: 1000px; /* Set to a value that is large enough to show all the content */
+  transition: max-height 1.4s ease;
+}
+
+.credit-info h4 {
+    font-size: var(--visible-b-text);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.credit-info ul li {
+    font-size: var(--body-text);
+}
 
 /** footer */
 footer {
@@ -634,6 +818,10 @@ footer .container {
     background: var(--accent-color);
     color: var(--main-color);
     font-size: var(--headline);
+}
+
+.trainer {
+    padding: 0 20px;
 }
 
 @media (max-width: 1260px) {
@@ -726,6 +914,13 @@ footer .container {
         width: 60%;
     }
 
+    .price-block {
+        flex-basis: calc(50% - 10px);
+    }
+
+    .accent-price-block {
+        margin-right: unset;
+    }
 
 }
 
@@ -739,6 +934,12 @@ footer .container {
         --visible-b-text : 18px;
         --body-text : 16px; 
     }
+
+    /** price */
+    .price-list__toggle {
+        width: 30vw;
+    }
+
 }
 
 @media (max-width: 480px) {
@@ -750,6 +951,17 @@ footer .container {
         --middle-text : 22px;
         --visible-b-text : 16px;
         --body-text : 14px; 
+    }
+
+    /** hero */
+    .hero-buttons {
+        justify-content: flex-start;
+        align-self: flex-start;
+        flex-direction: column;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
     }
 
     /** trainers */

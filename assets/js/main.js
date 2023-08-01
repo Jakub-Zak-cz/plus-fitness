@@ -1,5 +1,13 @@
 console.log('Hello Wordpress');
 
+const lessons = document.querySelectorAll(".lesson");
+
+lessons.forEach((lesson) => {
+    lesson.addEventListener("click", () => {
+        lesson.classList.toggle("l-active");
+    });
+});
+
 function togglePriceList(event, priceListId) {
   event.preventDefault();
 

@@ -730,6 +730,127 @@ body {
 .credit-info ul li {
     font-size: var(--body-text);
 }
+/** home-page code end */
+/** instruktors code */
+.instruktors-hero {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50)), url('../img/fitness_hero-img.png');
+}
+
+.instruktors_title {
+    max-width: unset;
+}
+
+.intruktors-undertitle {
+    min-width: 60ch;
+    margin-bottom: 30px;
+}
+
+/** need trainers */
+.need-intruktors {
+    padding: 100px 0;
+}
+
+.need-intruktors .container {
+    display: flex;
+    justify-content: center;
+}
+
+.need-intruktors_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.need-intruktors_text p {
+    font-size: var(--body-text);
+    max-width: 60ch;
+}
+
+/**
+ * lesson effect
+ */
+
+.lesson {
+    width: 100%;
+    cursor: pointer;
+    background: var(--accent-color);
+} 
+
+.visible {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.visible-headline {
+    font-size: var(--visible-b-text);
+    color: var(--main-color);
+    text-transform: capitalize;
+}
+
+.more {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1.4s ease;
+    background: var(--black-bg);
+}
+
+.lesson.l-active .more {
+    max-height: 300px;
+    animation: l-fade 1s ease-in-out;
+}
+
+.more p {
+    padding: 35px 25px 25px 25px;
+}
+
+.lesson.l-active .lesson-arrow {
+    transform: rotate(90deg);
+}
+
+.lesson-arrow {
+    transition: transform 0.5s ease-in;
+}
+
+@keyframes l-fade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+/** instruktor section code */
+.instruktors {
+    padding: 180px 0;
+}
+
+.instruktors .container {
+    display: flex;
+    flex-direction: column;
+    gap: 180px;
+}
+
+.instruktor-section {
+    display: flex;
+}
+
+.instruktor-img , .instruktor-content {
+    width: 49%;
+}
+
+.instruktor-img img {
+    width: 435px!important;
+    height: 600px!important;
+}
 
 /** footer */
 footer {
@@ -903,6 +1024,11 @@ footer .container {
         --body-text : 16px; 
     }
 
+    /** hero */
+    .intruktors-undertitle {
+        min-width: unset;
+    }
+
     /** why-us */
     .why-us .container {
         flex-direction: column;
@@ -940,6 +1066,13 @@ footer .container {
         width: 30vw;
     }
 
+    /** instruktors needed */
+    .need-intruktors .container {  
+        flex-direction: column;
+        justify-content: unset;
+        gap: 30px;
+     }
+
 }
 
 @media (max-width: 480px) {
@@ -962,6 +1095,10 @@ footer .container {
 
     .hero-buttons .btn {
         width: 100%;
+    }
+
+    .instruktors-hero {
+        height: fit-content;
     }
 
     /** trainers */

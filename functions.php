@@ -850,25 +850,45 @@ function display_price_list(){
 
 add_shortcode('price_list', 'display_price_list');
 
-function fitness_lesson_shortcode($atts) {
+function fitness_lekce_shortcode($atts) {
     $atts = shortcode_atts(array(
-        'lekce' => '', // Název atributu pro lekci
-    ), $atts);
+        'lekce' => 'spinning,kruhovy_trenink,trampoliny',
+    ), $atts, 'fitness_lekce');
 
-    $lesson_name = $atts['lekce'];
-    $lesson_option = get_option($lesson_name);
-    $lesson_text = get_option($lesson_name . '_text_lekce');
 
-    if (!empty($lesson_option)) {
-        $output = '<div class="lesson">';
-        $output .= '<h3>' . esc_html($lesson_option) . '</h3>';
-        $output .= '<p>' . esc_html($lesson_text) . '</p>';
+    $lekce_names = explode(',', $atts['lekce']);
+
+    $output = '';
+
+    foreach ($lekce_names as $name) {
+
+        $words = explode('_', $name);
+        $heading_text = implode(' ', $words);
+
+        $input_value = get_option($name, '');
+
+        $output .= '<div class="lesson shadow">'; // instead of faq
+
+        $output .= '<div class="visible">'; // instead of question
+
+        $output .= '<h3 class="visible-headline" >' . esc_html($heading_text) . '</h3>'; // instead of question-headline
+
+        $output .= '<img class="lesson-arrow" src="'. get_template_directory_uri() . ' /assets/img/arrow-fitness.png" >'; // instead of faq arrow
+
         $output .= '</div>';
-        return $output;
+
+        $output .= '<div class="more">'; // instead of answer 
+
+        $output .= '<p>' . esc_html($input_value) . '</p>';
+
+        $output .= '</div>';
+        
+        $output .= '</div>';
     }
-    return ''; // Pokud není hodnota nastavena nebo neplatná lekce, vrátíme prázdný řetězec.
+
+    return $output;
 }
-add_shortcode('fitness_lekce', 'fitness_lesson_shortcode');
+add_shortcode('fitness_lekce', 'fitness_lekce_shortcode');
 
 /** recent posts */
 function recent_posts_shortcode($atts) {

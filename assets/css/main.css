@@ -54,6 +54,7 @@ body {
     background: var(--main-color);
     color: var(--secondary-color);
     font-family: var(--montserrat);
+    overflow-x: hidden;
 }
 
 .accent-text {
@@ -1184,6 +1185,11 @@ footer .container {
         --body-text : 16px; 
     }
 
+    /** about */
+    .about-us_image {
+        height: unset;
+    }
+
     /** price */
     .price-list__toggle {
         width: 30vw;
@@ -1227,6 +1233,15 @@ footer .container {
         height: 90% !important;
     }
 
+    /** section paddings */
+    .reviews, .fitness-gallery, .why-us, .main_about-us, .price-list,
+    .instruktors {
+        padding: 60px 0;
+    }
+
+    footer {
+        padding: 80px 0 0 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1300,6 +1315,19 @@ footer .container {
 
     .review {
         padding: 10px 10px;
+    }
+
+    /** price list */
+    .price-list__content.active {
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .price-block {
+        flex-basis: unset;
+        width: 100%;
     }
 
 } 

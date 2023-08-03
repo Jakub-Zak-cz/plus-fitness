@@ -5,6 +5,7 @@
     padding: 0;
     border: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 :root {
@@ -332,7 +333,7 @@ body {
 /** end of swiper */
 
 #primary-header {
-    padding: 25px 25px;
+    padding: 10px 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -841,15 +842,44 @@ body {
 
 .instruktor-section {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .instruktor-img , .instruktor-content {
     width: 49%;
 }
 
+.instruktor-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
+}
+
 .instruktor-img img {
-    width: 435px!important;
-    height: 600px!important;
+    width: 90%!important;
+    height: 90%!important;
+}
+
+.instruktor-name {
+    font-size: var(--middle-text);
+}
+
+.hr {
+    width: 100%;
+    height: 1px;
+    background-color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.instruktor-right {
+    gap: 15px;
+}
+
+.instruktor-right .instruktor-img {
+    order: 2;
 }
 
 /** footer */
@@ -943,6 +973,98 @@ footer .container {
 
 .trainer {
     padding: 0 20px;
+}
+
+/** styles for posts pages*/
+.post-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.post-container p {
+    max-width: 65ch;
+    font-size: var(--visible-b-text);
+    line-height: 26px;
+}
+
+.entry-header {
+    padding-top: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.entry-title {
+    margin-top: 50px;
+    font-size: var(--headline);
+    flex: initial;
+}
+
+.featured-image img {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.entry-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 25px 0;
+    margin-top: 50px;
+    background: var(--main-color);
+}
+
+.entry-footer a {
+    color: var(--accent-color);
+    font-size: var(--visible-b-text);
+}
+
+.entry-date {
+    font-size: calc( var(--visible-b-text) - 2);
+}
+
+.entry-header .hr {
+    margin-top: 35px;
+    margin-bottom: 55px;
+    width: 70%;
+}
+
+/** recent posts */
+.recent-posts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 100px;
+    margin-top: 100px;
+}
+
+.post-preview a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 35px;
+}
+
+.post-preview a h3 {
+    font-size: var(--middle-text);
+}
+
+.post-excerpt {
+    font-size: calc( var(--visible-b-text) - 2px);
+    max-width: 65ch;
+}
+
+.post-preview:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
 }
 
 @media (max-width: 1260px) {
@@ -1071,7 +1193,38 @@ footer .container {
         flex-direction: column;
         justify-content: unset;
         gap: 30px;
-     }
+    }
+
+    /** instruktors */
+    .instruktor-section {
+        flex-direction: column;
+        gap: 50px !important;
+    }
+
+    .instruktor-content, .instruktor-img {
+        width: 100%;
+    }
+
+    .instruktor-img img {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .instruktor-right .instruktor-img {
+        order: unset;
+    }
+
+    /** recent post */
+    .post-preview a .thumbnail {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .post-preview a .thumbnail img {
+        width: 90% !important;
+        height: 90% !important;
+    }
 
 }
 
@@ -1087,18 +1240,25 @@ footer .container {
     }
 
     /** hero */
-    .hero-buttons {
-        justify-content: flex-start;
-        align-self: flex-start;
-        flex-direction: column;
+    .hero-section .container {
+        margin-top: 10vh;
     }
 
     .hero-buttons .btn {
-        width: 100%;
+        padding: 10px 30px;
     }
 
-    .instruktors-hero {
+    .instruktors-hero, .hero-section {
         height: fit-content;
+        padding-bottom: 50px;
+    }
+
+    .hero-section {
+        min-height: 75vh;
+    }
+
+    .instruktors-hero .hero-buttons .no-btn:hover {
+        border: 0;
     }
 
     /** trainers */

@@ -10,6 +10,7 @@ function fitness_theme_setup() {
     add_theme_support( 'menus' );
     add_theme_support( 'custom-logo' );
     add_theme_support( 'customizer' );
+    add_theme_support('post-thumbnails');
 }
 add_action( 'after_setup_theme', 'fitness_theme_setup' );
 
@@ -869,64 +870,57 @@ function fitness_lesson_shortcode($atts) {
 }
 add_shortcode('fitness_lekce', 'fitness_lesson_shortcode');
 
-function fitness_lekce_shortcode($atts) {
+/** recent posts */
+function recent_posts_shortcode($atts) {
     $atts = shortcode_atts(array(
-        'lekce' => 'spinning,kruhovy_trenink,trampoliny',
-    ), $atts, 'fitness_lekce');
+        'count' => 4, // Počet zobrazených příspěvků na stránce
+    ), $atts);
 
+    $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+    $args = array(
+        'post_type' => 'post',
+        'posts_per_page' => $atts['count'],
+        'orderby' => 'date',
+        'order' => 'DESC',
+        'paged' => $paged,
+    );
 
-    $lekce_names = explode(',', $atts['lekce']);
+    $query = new WP_Query($args);
 
-    $output = '';
+    $output = '<div class="recent-posts container">';
 
-    foreach ($lekce_names as $name) {
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+            $output .= '<div class="post-preview">';
+            $output .= '<a target="_blank" href="' . esc_url(get_permalink()) . '">';
+            $output .= '<div class="thumbnail">' . get_the_post_thumbnail() . '</div>';
+            $output .= '<h3 class="post-title">' . get_the_title() . '</h3>';
+            $output .= '<p class="post-excerpt">' . get_the_excerpt() . '</p>';
+            $output .= '</a>';
+            $output .= '</div>';
+        }
 
-        $words = explode('_', $name);
-        $heading_text = implode(' ', $words);
-
-        $input_value = get_option($name, '');
-
-        $output .= '<div class="lesson shadow">'; // instead of faq
-
-        $output .= '<div class="visible">'; // instead of question
-
-        $output .= '<h3 class="visible-headline" >' . esc_html($heading_text) . '</h3>'; // instead of question-headline
-
-        $output .= '<img class="lesson-arrow" src="'. get_template_directory_uri() . ' /assets/img/arrow-fitness.png" >'; // instead of faq arrow
-
-        $output .= '</div>';
-
-        $output .= '<div class="more">'; // instead of answer 
-
-        $output .= '<p>' . esc_html($input_value) . '</p>';
-
-        $output .= '</div>';
-        
-        $output .= '</div>';
+        // Paginace - pokud je více příspěvků než počet zobrazených na stránce, zobrazíme paginaci
+        if ($query->max_num_pages > 1) {
+            $output .= '<div class="pagination">';
+            $output .= paginate_links(array(
+                'base' => get_pagenum_link(1) . '%_%',
+                'format' => '/page/%#%',
+                'current' => max(1, $paged),
+                'total' => $query->max_num_pages,
+                'prev_text' => __('« Previous'),
+                'next_text' => __('Next »'),
+            ));
+            $output .= '</div>';
+        }
     }
+
+    $output .= '</div>';
+
+    wp_reset_postdata();
 
     return $output;
 }
-add_shortcode('fitness_lekce', 'fitness_lekce_shortcode');
+add_shortcode('recent_posts', 'recent_posts_shortcode');
 
-
-
-
-// function fitness_lekce_shortcode($atts) {
-//     $atts = shortcode_atts(array(
-//         'lekce' => 'spinning,kruhovy_trenink,trampoliny',
-//     ), $atts, 'fitness_lekce');
-
-//     $lekce_names = explode(',', $atts['lekce']);
-
-//     $output = '';
-
-//     foreach ($lekce_names as $name) {
-//         $input_value = get_option($name, '');
-
-//         $output .= '<p>' . esc_html($input_value) . '</p>';
-//     }
-
-//     return $output;
-// }
-// add_shortcode('fitness_lekce', 'fitness_lekce_shortcode');

@@ -486,6 +486,61 @@ function fitness_reviews_shortcode() {
                 </div>
                 <div class="swiper-pagination reviews-pagination"></div>
             </div>
+            
+            <div class="review-responsive swiper">
+
+                <div class="swiper-wrapper reviews-wrapper">
+
+                <?php
+
+            $count = get_theme_mod('custom_reviews_count', 3); // Získáme nastavený počet recenzí z customizeru
+
+            for ($i = 1; $i <= $count; $i++) {
+                $image_url = get_theme_mod("custom_review_image_$i");
+                $review_firstname = get_theme_mod("custom_review_firstname_$i");
+                $review_lastname = get_theme_mod("custom_review_lastname_$i");
+                $review_text = get_theme_mod("custom_review_text_$i");
+
+                // Zkontrolujeme, zda máme dostatečné informace o recenzi
+                if ($image_url && $review_firstname && $review_lastname && $review_text) {
+                ?>
+
+
+                    <div class="review swiper-slide">
+                        
+                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($review_firstname . ' ' . $review_lastname); ?>">
+                        <div class="reviews_text">
+
+                            <header class="reviews-headline">
+                                
+                                <h3><?php echo wp_kses_post($review_firstname . ' <b class="accent-text">' . $review_lastname . '</b>'); ?></h3>
+                                
+                                <figure class="review-figure">
+                                    
+                                    <img class="reviews-approval" src="<?php echo get_template_directory_uri(); ?>/assets/img/recommend.png" alt="<?php echo esc_attr($review_firstname . ' ' . $review_lastname); ?> doporučuje Plus Fitness">
+                                    
+                                    <figcaption>Doporučuje Plus Fitness</figcaption>
+                                
+                                </figure>
+                            
+                            </header>
+                            
+                            <p><?php echo esc_html($review_text); ?></p>
+                        
+                        </div>
+                        
+                    </div>
+
+                    <?php
+                }
+            }
+
+            ?>        
+
+                </div>
+                <div class="swiper-pagination reviews-pagination"></div>
+            </div>
+                
         </div>
     </aside>
     

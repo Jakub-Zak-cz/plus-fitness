@@ -301,6 +301,10 @@ body {
     gap: 10px;
 }
 
+.review-responsive {
+    display: none !important;
+}
+
 .swiper-pagination-bullet {
     background: var(--accent-color)!important;
 }
@@ -1099,9 +1103,13 @@ footer .container {
     }
 
     /** slider reviews*/
-
     .reviews_slider {
-        height: 90vh;
+        display: none !important; 
+    }
+
+    .review-responsive {
+        display: unset !important;
+        min-height: 90vh;
         max-height: 600px;
     } 
 
@@ -1257,7 +1265,7 @@ footer .container {
 
     /** hero */
     .hero-section .container {
-        margin-top: 10vh;
+        margin-top: 15vh;
     }
 
     .hero-buttons .btn {
@@ -1308,7 +1316,7 @@ footer .container {
         display: none;
     }
 
-    .reviews_slider {
+    .review-responsive {
         max-height: unset;
         height: 100vh;
     }
@@ -1333,7 +1341,7 @@ footer .container {
 } 
 
 @media (max-width: 320px) {
-    .reviews_slider {
+    .review-responsive {
         height: 130vh;
     }
 }

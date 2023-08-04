@@ -1108,9 +1108,7 @@ footer .container {
     }
 
     .review-responsive {
-        display: unset !important;
-        min-height: 90vh;
-        max-height: 600px;
+        display: flex !important;
     } 
 
     .review {
@@ -1317,12 +1315,11 @@ footer .container {
     }
 
     .review-responsive {
-        max-height: unset;
-        height: 100vh;
+        height: fit-content;
     }
 
     .review {
-        padding: 10px 10px;
+        padding: 60px 10px;
     }
 
     /** price list */
@@ -1339,9 +1336,3 @@ footer .container {
     }
 
 } 
-
-@media (max-width: 320px) {
-    .review-responsive {
-        height: 130vh;
-    }
-}

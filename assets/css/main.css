@@ -1250,16 +1250,7 @@ footer .container {
     }
 }
 
-@media (max-width: 480px) {
-    /** root */
-    :root {
-       /** typography */
-        --title : 36px;
-        --headline : 26px;
-        --middle-text : 22px;
-        --visible-b-text : 16px;
-        --body-text : 14px; 
-    }
+@media (max-width: 480px) { 
 
     /** hero */
     .hero-section .container {
@@ -1335,4 +1326,14 @@ footer .container {
         width: 100%;
     }
 
+    .price-list .container header p {
+        font-size: 14px;
+    }
+
 } 
+
+@media (max-width : 320px) {
+    :root { 
+        --body-text : 15px;
+    }   
+}

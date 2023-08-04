@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
 */
 var swiper = new Swiper(".trainers", {
     slidesPerView: 1,
-    spaceBetween: 30,
+    spaceBetween: 40,
     navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",

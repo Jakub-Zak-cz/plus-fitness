@@ -44,6 +44,40 @@
         </ul>
     </nav>
 
+    <!-- responsive hamburger menu -->
+    <div class="responsive-menu">
+        <div class="menu-btn">
+            <div class="menu-btn__burger"></div>
+        </div>
+        
+        <aside class="sidebar">
+        
+            <nav>
+            
+            <?php    
+    
+    if ($menu_items) {
+        foreach ($menu_items as $menu_item) {
+            $is_current = false;
+            if (is_page($menu_item->object_id)) {
+                $is_current = true;
+            }
+
+            echo '<div' . ($is_current ? ' class="current_page_item"' : '') . '>';
+            echo '<a href="' . $menu_item->url . '" ' . ($is_current ? 'aria-current="page"' : '') . '>' . $menu_item->title . '</a>';
+            echo '</div>';
+        }
+    }
+
+            ?>
+
+                <div><a href="#footer-nav">Kontakt</a></div>
+            
+            </nav>
+        
+        </aside>
+    </div>
+
 </header>
 
 

@@ -64,7 +64,40 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+/** hamburger menu */
+const menuBtn = document.querySelector('.menu-btn');
+let menuOpen = false;
+// menuBtn.addEventListener('click', () => {
+//   if(!menuOpen) {
+//     menuBtn.classList.add('open');
+//     menuOpen = true;
+//   } else {
+//     menuBtn.classList.remove('open');
+//     menuOpen = false;
+//   }
+// });
 
+const sidebar = document.querySelector('.sidebar');
+
+// Funkce pro otevření a zavření menu
+function toggleMenu() {
+  sidebar.classList.toggle('open');
+  menuBtn.classList.toggle('open');
+  menuOpen = !menuOpen; // Přepne hodnotu menuOpen na opačnou
+}
+
+// Při kliknutí na hamburger zavoláme funkci toggleMenu
+menuBtn.addEventListener('click', toggleMenu);
+
+// Při kliknutí na odkaz v menu zavřeme menu
+const links = sidebar.querySelectorAll('a');
+links.forEach(link => {
+  link.addEventListener('click', () => {
+    if (menuOpen) {
+      toggleMenu(); // Zavře menu, pokud je otevřené
+    }
+  });
+});
 /*
 * Swiper 
 */

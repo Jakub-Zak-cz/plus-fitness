@@ -346,6 +346,10 @@ body {
     background: var(--accent-color);
 }
 
+.responsive-menu {
+    display: none;
+}
+
 .primary-navigation ul {
     list-style-type: none;
     display: flex;
@@ -1152,6 +1156,100 @@ footer .container {
         --middle-text : 26px;
         --visible-b-text : 18px;
         --body-text : 16px; 
+    }
+
+    /** menu */
+    #primary-header {
+        padding: 1px 15px;
+    }
+
+    .responsive-menu {
+        display: unset;
+    }
+
+    .primary-navigation {
+        display: none;
+    }
+
+    /** burger menu */
+    .menu-btn {
+        position: relative;
+        display: flex;
+        z-index: 1;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        height: 80px;
+        cursor: pointer;
+        transition: all .5s ease-in-out;
+    }
+
+    .menu-btn__burger,
+    .menu-btn__burger::before,
+    .menu-btn__burger::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 6px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+    transition: all .5s ease-in-out;
+    }
+
+    .menu-btn__burger::before {
+    transform: translateY(-16px);
+    }
+
+    .menu-btn__burger::after {
+    transform: translateY(16px);
+    }
+
+    /* ANIMATION */
+    .menu-btn.open .menu-btn__burger {
+    transform: translateX(-50px);
+    background: transparent;
+    box-shadow: none;
+    }
+
+    .menu-btn.open .menu-btn__burger::before {
+    transform: rotate(45deg) translate(35px, -35px);
+    }
+
+    .menu-btn.open .menu-btn__burger::after {
+    transform: rotate(-45deg) translate(35px, 35px);
+    }
+
+    /* Sidebar menu */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+        background-color: var(--black-bg);
+        transition: height .4s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    .sidebar.open {
+        height: 100%;
+    }
+
+    .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .sidebar nav div a {
+        text-decoration: none;
+        color: var(--secondary-color);
+        font-size: 20px;
     }
 
     /** hero */

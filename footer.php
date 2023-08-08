@@ -51,7 +51,7 @@
 
         <a href="mailto:info@plusfitness.cz">info@plusfitness.cz</a>
 
-        <a target="_blank" id="need-trainers" href="#">Sháníme nové trenéry</a>
+        <a target="_blank" id="need-trainers" href="#">Hledáme nové instruktory</a>
 
         <a target="_blank" id="contract" href="#">Provozní řád a obchodní podmínky</a>
       

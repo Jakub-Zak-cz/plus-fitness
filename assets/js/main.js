@@ -1,5 +1,35 @@
 console.log('Hello Wordpress');
 
+/** hamburger menu */
+// Získání všech tlačítek hamburger menu
+const menuBtns = document.querySelectorAll('.menu-btn');
+
+// Získání všech bočních panelů
+const sidebars = document.querySelectorAll('.sidebar');
+
+// Funkce pro otevření a zavření menu
+function toggleMenu(event) {
+  const menuBtn = event.currentTarget;
+  const sidebar = menuBtn.nextElementSibling; // Získání příslušného bočního panelu
+  sidebar.classList.toggle('open');
+  menuBtn.classList.toggle('open');
+}
+
+// Při kliknutí na tlačítko hamburger zavoláme funkci toggleMenu
+menuBtns.forEach(menuBtn => {
+  menuBtn.addEventListener('click', toggleMenu);
+});
+
+// Při kliknutí na odkaz v menu zavřeme menu
+sidebars.forEach(sidebar => {
+  const links = sidebar.querySelectorAll('a');
+  links.forEach(link => {
+    link.addEventListener('click', toggleMenu);
+  });
+});
+
+
+
 const lessons = document.querySelectorAll(".lesson");
 
 lessons.forEach((lesson) => {
@@ -32,71 +62,37 @@ function togglePriceList(event, priceListId) {
 const creditBtn = document.getElementById("credit-btn");
 const creditInfo = document.querySelector(".credit-info");
 
-creditBtn.addEventListener("click", () => {
-  creditBtn.classList.toggle("open");
-});
+if (creditBtn) {
+  creditBtn.addEventListener("click", () => {
+    creditBtn.classList.toggle("open");
+  });
+}
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
 
-  // Získáme tlačítka a ceníky
   const toggleAdult = document.getElementById("toggle-adult");
   const toggleStudent = document.getElementById("toggle-student");
   const adultPriceList = document.getElementById("adult-price-list");
   const studentPriceList = document.getElementById("student-price-list");
 
-  // Při kliknutí na tlačítko pro dospělé
-  toggleAdult.addEventListener("click", function() {
-    // Skryjeme ceník pro studenty a zobrazíme ceník pro dospělé
-    studentPriceList.classList.remove("active");
-    adultPriceList.classList.add("active");
-    toggleStudent.classList.remove("active");
-    toggleAdult.classList.add("active");
-  });
+  if (toggleAdult && toggleStudent && adultPriceList && studentPriceList) {
+    toggleAdult.addEventListener("click", function() {
+      studentPriceList.classList.remove("active");
+      adultPriceList.classList.add("active");
+      toggleStudent.classList.remove("active");
+      toggleAdult.classList.add("active");
+    });
 
-  // Při kliknutí na tlačítko pro studenty
-  toggleStudent.addEventListener("click", function() {
-    // Skryjeme ceník pro dospělé a zobrazíme ceník pro studenty
-    adultPriceList.classList.remove("active");
-    studentPriceList.classList.add("active");
-    toggleAdult.classList.remove("active");
-    toggleStudent.classList.add("active");
-  });
-});
+    toggleStudent.addEventListener("click", function() {
+      adultPriceList.classList.remove("active");
+      studentPriceList.classList.add("active");
+      toggleAdult.classList.remove("active");
+      toggleStudent.classList.add("active");
+    });
+  }
 
-/** hamburger menu */
-const menuBtn = document.querySelector('.menu-btn');
-let menuOpen = false;
-// menuBtn.addEventListener('click', () => {
-//   if(!menuOpen) {
-//     menuBtn.classList.add('open');
-//     menuOpen = true;
-//   } else {
-//     menuBtn.classList.remove('open');
-//     menuOpen = false;
-//   }
-// });
-
-const sidebar = document.querySelector('.sidebar');
-
-// Funkce pro otevření a zavření menu
-function toggleMenu() {
-  sidebar.classList.toggle('open');
-  menuBtn.classList.toggle('open');
-  menuOpen = !menuOpen; // Přepne hodnotu menuOpen na opačnou
-}
-
-// Při kliknutí na hamburger zavoláme funkci toggleMenu
-menuBtn.addEventListener('click', toggleMenu);
-
-// Při kliknutí na odkaz v menu zavřeme menu
-const links = sidebar.querySelectorAll('a');
-links.forEach(link => {
-  link.addEventListener('click', () => {
-    if (menuOpen) {
-      toggleMenu(); // Zavře menu, pokud je otevřené
-    }
-  });
 });
 /*
 * Swiper 

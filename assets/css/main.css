@@ -1082,6 +1082,10 @@ footer .container {
     .trainer-headline {
         font-size: var(--middle-text);
     }
+
+    .lesson.l-active .more {
+        overflow: auto;
+    }
 }
 
 /** media queries */

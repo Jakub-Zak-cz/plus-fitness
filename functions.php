@@ -311,7 +311,7 @@ function fitness_trainings($wp_customize) {
         'spinning' => 'Spinning',
         'kruhovy_trenink' => 'Kruhový Trénink',
         'trampoliny' => 'Trampolíny',
-        'trener' => 'Osobní Fitness Trenér',
+        'fitness_trener' => 'Osobní Fitness Trenér',
         'pevne_telo' => 'Pevné Tělo',
         'bodyforming' => 'BodyForming',
         'spalovacka' => 'Spalovačka'
@@ -433,7 +433,7 @@ function fitness_reviews_shortcode() {
                 
                 <h2 class="reviews_title">Co o nás říkají <b class="accent-text">naši zákazníci</b></h2>
             
-                <p class="reviews_paragraph">Níže najdete několik referencí od našich klientů, kteří nám důvěřovali a dosáhli skvělých výsledků. Jejich příběhy jsou důkazem naší oddanosti a schopnosti pomoci lidem dosáhnout jejich fitness cílů. Přečtěte si jejich zkušenosti a motivujte se k vlastnímu úspěchu. Recenze jsou přímo z našeho <a href="https://www.facebook.com/plusfitko/reviews" target="_blank" aria-label="Odkaz na sekci s recenzemi z naší Facebook stránky."> Facebooku</a></p>
+                <p class="reviews_paragraph">Níže najdete několik referencí od našich klientů, kteří nám důvěřovali a dosáhli skvělých výsledků. Přečtěte si jejich zkušenosti a motivujte se k vlastnímu úspěchu. Recenze jsou přímo z našeho <a href="https://www.facebook.com/plusfitko/reviews" target="_blank" aria-label="Odkaz na sekci s recenzemi z naší Facebook stránky."> Facebooku</a></p>
             
             </header>
             <div class="reviews_slider swiper">
@@ -747,7 +747,7 @@ function display_price_list(){
                             s Instruktorem
                         </span>
 
-                        <span class="price-span">za 1 hodinu</span>
+                        <span class="price-span">1 hodina</span>
 
                         <span class="price"><?php echo esc_html($group); ?></span>
 
@@ -757,7 +757,7 @@ function display_price_list(){
 
                         <span class="price-span">Cvičení s osobním trenérem</span>
 
-                        <span class="price-span">za 1 hodinu</span>
+                        <span class="price-span">1 hodina</span>
 
                         <span class="price"><?php echo esc_html($personal); ?></span>
 
@@ -873,7 +873,7 @@ function display_price_list(){
                             s Instruktorem
                         </span>
 
-                        <span class="price-span">za 1 hodinu</span>
+                        <span class="price-span">1 hodina</span>
 
                         <span class="price"><?php echo esc_html($group_student); ?></span>
 
@@ -883,7 +883,7 @@ function display_price_list(){
 
                         <span class="price-span">Cvičení s osobním trenérem</span>
 
-                        <span class="price-span">za 1 hodinu</span>
+                        <span class="price-span">1 hodina</span>
 
                         <span class="price"><?php echo esc_html($personal_student); ?></span>
 

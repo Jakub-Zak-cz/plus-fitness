@@ -1084,7 +1084,7 @@ footer .container {
     }
 
     .lesson.l-active .more {
-        overflow: auto;
+        overflow-y: scroll;
     }
 }
 

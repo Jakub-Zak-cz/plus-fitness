@@ -1,33 +1,26 @@
 console.log('Hello Wordpress');
 
 /** hamburger menu */
-// Získání všech tlačítek hamburger menu
-const menuBtns = document.querySelectorAll('.menu-btn');
-
-// Získání všech bočních panelů
-const sidebars = document.querySelectorAll('.sidebar');
+const menuBtn = document.querySelector('.menu-btn');
+let menuOpen = false;
+const sidebar = document.querySelector('.sidebar');
 
 // Funkce pro otevření a zavření menu
-function toggleMenu(event) {
-  const menuBtn = event.currentTarget;
-  const sidebar = menuBtn.nextElementSibling; // Získání příslušného bočního panelu
+function toggleMenu() {
+  const sidebar = document.querySelector('.sidebar');
   sidebar.classList.toggle('open');
   menuBtn.classList.toggle('open');
+  menuOpen = !menuOpen;
 }
 
-// Při kliknutí na tlačítko hamburger zavoláme funkci toggleMenu
-menuBtns.forEach(menuBtn => {
-  menuBtn.addEventListener('click', toggleMenu);
-});
+// Při kliknutí na hamburger zavoláme funkci toggleMenu
+menuBtn.addEventListener('click', toggleMenu);
 
 // Při kliknutí na odkaz v menu zavřeme menu
-sidebars.forEach(sidebar => {
-  const links = sidebar.querySelectorAll('a');
-  links.forEach(link => {
-    link.addEventListener('click', toggleMenu);
-  });
+const links = document.querySelectorAll('.sidebar a');
+links.forEach(link => {
+  link.addEventListener('click', toggleMenu);
 });
-
 
 
 const lessons = document.querySelectorAll(".lesson");

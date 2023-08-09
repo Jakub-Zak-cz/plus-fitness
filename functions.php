@@ -270,7 +270,7 @@ function fitness_price_list($wp_customize) {
         $wp_customize->add_setting($option_key, array(
             'default' => '',
             'type' => 'option', // Uložení hodnoty jako volbu v databázi
-            'sanitize_callback' => 'sanitize_text_field', // Očištění hodnoty
+            'sanitize_callback' => 'wp_kses_post', // Očištění hodnoty
         ));
 
         $wp_customize->add_control($option_key, array(
@@ -322,13 +322,13 @@ function fitness_trainings($wp_customize) {
         $wp_customize->add_setting($option_key, array(
             'default' => '',
             'type' => 'option', // Uložení hodnoty jako volbu v databázi
-            'sanitize_callback' => 'sanitize_text_field', // Očištění hodnoty
+            'sanitize_callback' => 'wp_kses_post', // Očištění hodnoty
         ));
 
         $wp_customize->add_control($option_key, array(
             'label' => $option_label, // Popisek pole
             'section' => 'fitness_lekce', // Sekce, do které pole patří
-            'type' => 'text', // Typ pole
+            'type' => 'textarea', // Typ pole
         ));
     }
 }
@@ -394,7 +394,7 @@ function fitness_trainers_slider_shortcode() {
                             </ul>
 
                         <?php if ($trainer_link) : ?>
-                            <a target="_blank" class="trainers-link btn white-btn" href="<?php echo esc_url($trainer_link); ?>">Více informací -></a>
+                            <a target="_blank" class="trainers-link btn white-btn" href="<?php echo home_url() ; ?>/instruktori<?php echo esc_url($trainer_link); ?>">Více informací -></a>
                         <?php endif; ?> 
                         
                         </div>
@@ -928,13 +928,18 @@ function fitness_lekce_shortcode($atts) {
 
         $output .= '<h3 class="visible-headline" >' . esc_html($heading_text) . '</h3>'; // instead of question-headline
 
-        $output .= '<img class="lesson-arrow" src="'. get_template_directory_uri() . ' /assets/img/arrow-fitness.png" >'; // instead of faq arrow
+        $output .= '<img class="lesson-arrow" alt="černá šipka, při kliknutí se zobrazí popis lekce" src="'. get_template_directory_uri() . ' /assets/img/arrow-fitness.png" >'; // instead of faq arrow
 
         $output .= '</div>';
 
-        $output .= '<div class="more">'; // instead of answer 
+        if ($name === 'fitness_trenér') {
+            $output .= '<div class="more" id="fitness-training">'; // instead of answer 
+        } else {
+            $output .= '<div class="more">'; // instead of answer 
+        }
 
-        $output .= '<p>' . esc_html($input_value) . '</p>';
+        // Use wpautop to format the input value
+        $output .= wpautop(esc_html($input_value));
 
         $output .= '</div>';
         

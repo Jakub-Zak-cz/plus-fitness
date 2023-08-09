@@ -392,9 +392,9 @@ body {
     transition: none !important;
     content: "" !important;
     position: absolute !important;
-    bottom: 0 !important;
+    bottom: -2px !important;
     width: 100% !important;
-    height: 2px !important;
+    height: 1px !important;
     background-color: var(--main-color) !important;
 }
 
@@ -816,6 +816,10 @@ body {
     animation: l-fade 1s ease-in-out;
 }
 
+.lesson.l-active #fitness-training {
+    overflow-y: auto;
+}
+
 .more p {
     padding: 35px 25px 25px 25px;
 }
@@ -1077,14 +1081,15 @@ footer .container {
     transition: transform 0.3s ease;
 }
 
-@media (max-width: 1260px) {
+@media (max-width: 1366px) {
     /** trainers */
     .trainer-headline {
         font-size: var(--middle-text);
     }
 
+    /** instruktors */
     .lesson.l-active .more {
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 }
 
@@ -1254,6 +1259,20 @@ footer .container {
         text-decoration: none;
         color: var(--secondary-color);
         font-size: 20px;
+    }
+
+    .sidebar nav .current_page_item a {
+        position: relative;
+    }
+    
+    .sidebar nav .current_page_item a::after {
+        content: "" !important;
+        position: absolute !important;
+        bottom: -3px !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 1px !important;
+        background-color: var(--secondary-color) !important;
     }
 
     /** hero */

@@ -39,7 +39,7 @@
 
             ?>
 
-            <li class="footer-contact"><a href="#footer-nav">Kontakt</a></li>
+            <li><a href="#footer-nav">Kontakt</a></li>
 
         </ul>
     </nav>

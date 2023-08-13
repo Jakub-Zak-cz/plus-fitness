@@ -370,9 +370,9 @@ body {
 .primary-navigation ul li a::before, .primary-navigation ul li a::after {
     content: "";
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     width: 0;
-    height: 2px;
+    height: 1px;
     background-color: var(--main-color);
     transition: width 0.3s ease-in-out;
 }
@@ -545,6 +545,90 @@ body {
     max-width: 50ch;
 }
 
+/** schedule */
+.schedule {
+    padding: 100px 0;
+}
+
+.schedule-content {
+    display: none;
+}
+
+#schedule-title {
+    font-size: var(--headline);
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.schedule-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.schedule_controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.schedule-control_toggle {
+    width: 20%;
+    padding: 12px 33px;
+    font-size: calc( var(--middle-text) - 2px );
+    color: var(--secondary-color);
+    background: transparent;
+    position: relative;
+}
+
+.price-list__toggle:focus, .schedule-control_toggle:focus {
+    background: rgba(var(--accent-color-rgb), 0.64);
+    color: var(--main-color);
+}
+
+.schedule-control_toggle.active {
+    display: block;
+    background: var(--accent-color);
+    color: var(--main-color);
+    box-shadow: 0px -20px 14px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.schedule-control_responsive {
+    display: none !important;
+}
+
+.schedule-content.active {
+    justify-content: center;
+    align-items: center;
+}
+
+/** schedule-cart */
+.schedule-content.active .schedule-cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 25px;
+    min-height: 350px;
+    padding: 35px 20px;
+    border: 1px solid var(--secondary-color);
+    min-width: 250px;
+}
+
+.schedule-name {
+    font-size: var(--middle-text);
+}
+
+.schedule-event {
+    font-size: var(--visible-b-text);
+    text-align: center;
+}
+
+.schedule-time {
+    font-size: calc( var(--body-text - 2px) );
+    color: #707070;
+}
+
 /** price*/
 .price-list {
     padding: 180px 0;
@@ -587,11 +671,6 @@ body {
     color: var(--secondary-color);
     background: transparent;
     position: relative;
-}
-
-.price-list__toggle:focus {
-    background: rgba(var(--accent-color-rgb), 0.64);
-    color: var(--main-color);
 }
 
 .price-list_controls .active {
@@ -1055,6 +1134,7 @@ footer .container {
     flex-direction: column;
     gap: 100px;
     margin-top: 100px;
+    margin-bottom: 50px;
 }
 
 .post-preview a {
@@ -1081,6 +1161,28 @@ footer .container {
     transition: transform 0.3s ease;
 }
 
+.page-numbers {
+    color: var(--accent-color);
+    font-size: var(--visible-b-text);
+}
+
+.current {
+    color: var(--secondary-color);
+}
+
+/** error page */
+#error-main {
+    padding: 25vh 0;
+    display: flex;
+    flex-direction: column;
+    gap: 75px;
+}
+
+#error-link {
+    color: var(--accent-color);
+    font-size: var(--visible-b-text);
+}
+
 @media (max-width: 1366px) {
     /** trainers */
     .trainer-headline {
@@ -1091,6 +1193,21 @@ footer .container {
     .lesson.l-active .more {
         overflow-y: auto;
     }
+}
+
+@media (max-width: 1200px) {
+    .schedule-content.active {
+        flex-wrap: wrap;
+    }
+
+    .schedule-content.active .schedule-cart {
+        flex: 1 1 calc(50% - 20px);
+        max-width: 250px;
+    }
+
+    .last-odd {
+        max-width: 500px !important;
+    } 
 }
 
 /** media queries */
@@ -1140,6 +1257,14 @@ footer .container {
     /** gallery */
     .trainer {
         padding: 0 60px;
+    }
+
+    /** schedule */
+
+    .schedule-control_toggle {
+        font-size: var(--visible-b-text);
+        padding: 10px 15px;
+        width: 16%;
     }
 
     /** footer */
@@ -1348,6 +1473,18 @@ footer .container {
         order: unset;
     }
 
+    /** schedule */
+    .schedule-control_toggle {
+        display: none !important;
+    }
+
+    .schedule-control_responsive {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 10px;
+    }
+
     /** recent post */
     .post-preview a .thumbnail {
         display: flex;
@@ -1449,6 +1586,24 @@ footer .container {
 
     .price-list .container header p {
         font-size: 14px;
+    }
+
+    /** schedule */
+    .schedule-content.active {
+        flex-wrap: nowrap;
+        flex-direction: column;
+    }
+
+    .last-odd {
+        max-width: unset !important;
+    }
+
+    .schedule-content.active .schedule-cart {
+        max-width: 100%;
+    }
+
+    .schedule-btn {
+        padding: 15px 25px;
     }
 
 } 

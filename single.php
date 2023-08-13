@@ -8,8 +8,19 @@
         while (have_posts()) :
             the_post();
 
-            // Include the article content template.
-            get_template_part('template-parts/content', 'article');
+            $author_name = get_post_meta(get_the_ID(), 'author_meta_key', true);
+
+            if ($author_name === 'zapier') {
+            
+                // Include the schedule content template
+                get_template_part('template-parts/content', 'schedule');
+            
+            } else {
+
+                // Include the article content template.
+                get_template_part('template-parts/content', 'article');
+
+            }
 
         // End the loop.
         endwhile;

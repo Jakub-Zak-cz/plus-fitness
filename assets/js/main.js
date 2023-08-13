@@ -25,12 +25,35 @@ links.forEach(link => {
 
 const lessons = document.querySelectorAll(".lesson");
 
+/** při kliknutí se změní lekce zobrazené pro daný den */
+function toggleSchedule(event, scheduleId) {
+  event.preventDefault();
+
+  const scheduleContent = document.getElementById(scheduleId);
+  const toggleButtons = document.getElementsByClassName("schedule-control_toggle");
+
+  for (let i = 0; i < toggleButtons.length; i++) {
+    toggleButtons[i].classList.remove("active");
+  }
+
+  event.target.classList.add("active");
+
+  const allScheduleContent = document.getElementsByClassName("schedule-content");
+  for (let i = 0; i < allScheduleContent.length; i++) {
+    allScheduleContent[i].classList.remove("active");
+  }
+
+  scheduleContent.classList.add("active");
+}
+
+
 lessons.forEach((lesson) => {
     lesson.addEventListener("click", () => {
         lesson.classList.toggle("l-active");
     });
 });
 
+/** při kliknutí se změní ceny podle dospělých a studentu */
 function togglePriceList(event, priceListId) {
   event.preventDefault();
 
@@ -87,6 +110,43 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
+
+
+function applyLastOddClass(scheduleContent) {
+  const scheduleCart = scheduleContent.querySelectorAll('.schedule-cart');
+
+  // Odstraníme třídu .last-odd u všech prvků
+  scheduleCart.forEach(cart => {
+      cart.classList.remove('last-odd');
+  });
+
+  // Zjistíme, zda je počet prvků lichý
+  const isOddCount = scheduleCart.length % 2 === 1;
+
+  if (isOddCount) {
+      // Přidáme třídu .last-odd pouze poslednímu lichému prvku
+      const lastScheduleCartIndex = scheduleCart.length - 1;
+      scheduleCart[lastScheduleCartIndex].classList.add('last-odd');
+  }
+}
+
+// Načtení stránky - aplikujeme třídu .last-odd na první aktivní schedule-content
+window.addEventListener('load', function() {
+  const activeScheduleContent = document.querySelector('.schedule-content.active');
+  applyLastOddClass(activeScheduleContent);
+});
+
+// Při změně aktivního schedule-content zavoláme tuto funkci
+const scheduleControls = document.querySelector('.schedule_controls');
+scheduleControls.addEventListener('click', function(event) {
+  if (event.target.classList.contains('schedule-control_toggle')) {
+      const activeScheduleContent = document.querySelector('.schedule-content.active');
+      applyLastOddClass(activeScheduleContent);
+  }
+});
+
+
+
 /*
 * Swiper 
 */

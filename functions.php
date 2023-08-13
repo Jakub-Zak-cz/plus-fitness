@@ -989,8 +989,8 @@ function recent_posts_shortcode($atts) {
                 'format' => '/page/%#%',
                 'current' => max(1, $paged),
                 'total' => $query->max_num_pages,
-                'prev_text' => __('« Previous'),
-                'next_text' => __('Next »'),
+                'prev_text' => __('« Předchozí'),
+                'next_text' => __('Další »'),
             ));
             $output .= '</div>';
         }
@@ -1004,3 +1004,233 @@ function recent_posts_shortcode($atts) {
 }
 add_shortcode('recent_posts', 'recent_posts_shortcode');
 
+/** shortcode for showing schedule of trainings */
+
+function display_schedule_shortcode() {
+
+    ob_start(); ?>
+
+    <section class="schedule" aria-labelledby="#schedule-title">
+
+        <div class="container">
+
+            <h2 id="schedule-title">Skupinová cvičení pro <b class="accent-text">Srpen</b></h2>
+
+            <div class="schedule-wrapper">
+                
+                <div class="schedule_controls">
+                    
+                    <button class="schedule-control_toggle active" onclick="toggleSchedule(event, 'schedule-monday')">Pondělí</button>
+                    
+                    <!-- <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-tuesday')">Úterý</button> -->
+                    
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-wednesday')">Středa</button>
+                    
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-thursday')">Čtvrtek</button>
+                    
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-friday')">Pátek</button>
+                    
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-saturday')">Sobota</button>
+                    
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-sunday')">Neděle</button>
+
+                    <!-- responsive version -->
+
+                    <button class="schedule-control_toggle schedule-control_responsive active" onclick="toggleSchedule(event, 'schedule-monday')">Po</button>
+                    
+                    <!-- <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-tuesday')">Út</button> -->
+                    
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-wednesday')">St</button>
+                    
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-thursday')">Čt</button>
+                    
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-friday')">Pá</button>
+                    
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-saturday')">So</button>
+                    
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-sunday')">Ne</button>
+                
+                </div>
+
+                <div id="schedule-monday" class="schedule-content active">
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Michal</span>
+
+                        <span class="schedule-event">KRUHÁČ-štíhlá linie</span>
+
+                        <span class="schedule-time">18:00 - 19:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div>
+
+                </div>
+                
+                <!-- <div id="schedule-tuesday" class="schedule-content">
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Péťa</span>
+
+                        <span class="schedule-event">PEVNÉ TĚLO</span>
+
+                        <span class="schedule-time">18:00 - 19:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div>
+
+                </div> -->
+                
+                <div id="schedule-wednesday" class="schedule-content">
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Péťa</span>
+
+                        <span class="schedule-event">PEVNÉ TĚLO</span>
+
+                        <span class="schedule-time">18:00 - 19:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div>
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Péťa</span>
+
+                        <span class="schedule-event">PEVNÉ TĚLO</span>
+
+                        <span class="schedule-time">18:00 - 19:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div>
+
+                </div>
+                
+                <div id="schedule-thursday" class="schedule-content">
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Michal</span>
+
+                        <span class="schedule-event">KRUHÁČ - štíhlá linie</span>
+
+                        <span class="schedule-time">19:00 - 20:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div>
+
+                </div>
+                
+                <div id="schedule-friday" class="schedule-content">
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Michal</span>
+
+                        <span class="schedule-event">KRUHÁČ - štíhlá linie</span>
+
+                        <span class="schedule-time">19:00 - 20:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div> 
+                    
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Michal</span>
+
+                        <span class="schedule-event">KRUHÁČ - štíhlá linie</span>
+
+                        <span class="schedule-time">19:00 - 20:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div> 
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Michal</span>
+
+                        <span class="schedule-event">KRUHÁČ - štíhlá linie</span>
+
+                        <span class="schedule-time">19:00 - 20:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div> 
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Péťa</span>
+
+                        <span class="schedule-event">BODYFORMING</span>
+
+                        <span class="schedule-time">10:00 – 11:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div>
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Péťa</span>
+
+                        <span class="schedule-event">BODYFORMING</span>
+
+                        <span class="schedule-time">10:00 – 11:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div>
+
+                </div>
+                
+                <div id="schedule-saturday" class="schedule-content">
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Péťa</span>
+
+                        <span class="schedule-event">BODYFORMING</span>
+
+                        <span class="schedule-time">10:00 – 11:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div>
+
+                </div>
+                
+                <div id="schedule-sunday" class="schedule-content">
+
+                    <div class="schedule-cart">
+
+                        <span class="schedule-name">Péťa</span>
+
+                        <span class="schedule-event">PEVNÉ TĚLO</span>
+
+                        <span class="schedule-time">19:00 – 20:00</span>
+
+                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+
+                    </div>                
+
+                </div>
+            
+            </div>
+
+        </div>
+
+    </section>
+    
+    <?php
+    return ob_get_clean();
+} ;
+add_shortcode('show_schedule', 'display_schedule_shortcode');

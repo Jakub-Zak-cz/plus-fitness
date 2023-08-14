@@ -98,13 +98,12 @@ body {
 .review img  {
     width: 132px;
     height: 132px;
+    border-radius: 100px;
     object-fit: unset;
     flex-shrink: 0;
 }
 
 .gallery-slide img {
-    /* min-width: 30vw;
-    height: 680px; */
     object-fit: unset;
     flex-shrink: 0;
     border: 2px solid var(--accent-color);
@@ -285,6 +284,7 @@ body {
     width: 40px!important;
     height: 42.817px!important;
     display: inline-block !important;
+    border-radius: 0 !important;
     position: relative;
 }
 
@@ -627,6 +627,71 @@ body {
 .schedule-time {
     font-size: calc( var(--body-text - 2px) );
     color: #707070;
+}
+
+/** schedule post */
+.schedule_article {
+    display: flex;
+}
+
+.schedule_article-container, .schedule-trainer_section {
+    padding-bottom: 25vh;
+    padding-top: 15vh;
+}
+
+.schedule_article-container {
+    width: 65%;
+    border-right: 1px solid var(--secondary-color);
+    padding-left: 70px;
+    padding-right: 40px;
+}
+
+.schedule-trainer_section {
+    width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.schedule-trainer_section img {
+    width: 280px;
+    height: 380px;
+}
+
+.schedule-trainer_section h3 {
+    font-size: var(--visible-b-text);
+    margin-top: 25px;
+}
+
+.schedule_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px 20px 5px;
+}
+
+.schedule_title {
+    font-size: var(--middle-text);
+}
+
+.schedule_header span {
+    color: #CECECE;
+}
+
+.schedule-text_about {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-size: var(--body-text);
+}
+
+.schedule-text_container .btn {
+    padding: 15px 35px;
+    width: 250px;
+}
+
+.schedule-text_responsive-img, .schedule-text_responsive-h3{
+    display: none;
 }
 
 /** price*/
@@ -1267,6 +1332,51 @@ footer .container {
         width: 16%;
     }
 
+    /** schedule post */ 
+    .schedule_article {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .schedule_article-container, .schedule-trainer_section {
+        padding-bottom: unset;
+        padding-top: unset;
+    }
+
+    .schedule-trainer_section {
+        display: none;
+    }
+
+    .schedule_article-container {
+        width: 90%;
+        border-right: unset;
+        padding-left: unset;
+        padding-right: unset;
+        margin: 0 auto;
+        margin-top: 15vh;
+    }
+
+    .schedule-text_responsive-img, .schedule-text_responsive-h3{
+        display: unset;
+    }
+
+    .schedule-text_responsive-h3 {
+        margin-top: 25px;
+    }
+
+    .schedule-text_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .schedule-text_container .btn {
+        margin-bottom: 100px;
+    }
+
     /** footer */
     footer .container {
         flex-direction: column;
@@ -1408,8 +1518,8 @@ footer .container {
     /** why-us */
     .why-us .container {
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-start;
+        justify-content: flex-start;
     }
 
     .why {
@@ -1586,6 +1696,19 @@ footer .container {
 
     .price-list .container header p {
         font-size: 14px;
+    }
+
+    /** schedule post */
+    .schedule_title {
+        font-size: var(--visible-b-text);
+    }
+
+    .schedule_header span {
+        font-size: 12px;
+    }
+
+    .schedule_article-container {
+        margin-top: 8vh;
     }
 
     /** schedule */

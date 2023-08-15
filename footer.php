@@ -7,12 +7,12 @@
 
       <div class="opening-hours">
 
-        <span>Po-Pa : 8:00 - 12:00, 15:00 - 20:30</span>
+        <span>Po-Pa: 8:00 - 12:00, 15:00 - 20:30</span>
 
-        <span>So : 8:00 - 12:00</span>
+        <span>So: 8:00 - 12:00</span>
 
         <span>
-          Ne : Dle inviduálních tréninků <br>
+          Ne: dle inviduálních tréninků <br>
           a rozpisu skupinových cvičení
         </span>
 

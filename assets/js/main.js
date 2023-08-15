@@ -164,31 +164,6 @@ var swiper = new Swiper(".trainers", {
     },
 });
 
-var reviews_slider = new Swiper(".reviews_slider", {
-    direction: "vertical",
-    mousewheel: true,
-    slidesPerView: 1,
-    spaceBetween: 30,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-});
-
-var review_responsive = new Swiper(".review-responsive", {
-  direction: "horizontal",
-  slidesPerView: 1,
-  spaceBetween: 30,
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-});
-
 var gallery_slider = new Swiper(".gallery-slider", {
    slidesPerView: 1,
    spaceBetween: 30,

@@ -118,74 +118,6 @@ function custom_theme_register_customizer_sections($wp_customize) {
 }
 add_action('customize_register', 'custom_theme_register_customizer_sections');
 
-/** reviews */
-function customizer_fitness_reviews_section($wp_customize) {
-    // Vytvoření nové sekce
-    $wp_customize->add_section('custom_fitness_reviews', array(
-        'title' => 'Recenze', // Název sekce
-        'description' => 'Přidání recenzí o vašem fitness centru.', // Popis sekce
-        'priority' => 150, // Priorita sekce
-    ));
-
-    // Přidání možnosti pro nastavení počtu recenzí
-    $wp_customize->add_setting('custom_reviews_count', array(
-        'default' => 3, // Počet recenzí jako výchozí hodnota
-        'sanitize_callback' => 'absint', // Očistí hodnotu a zajistí, že bude celé číslo
-    ));
-
-    $wp_customize->add_control('custom_reviews_count', array(
-        'label' => 'Počet recenzí k zobrazení', // Název pole
-        'section' => 'custom_fitness_reviews', // Přiřazení k nové sekci
-        'type' => 'number',
-    ));
-
-    // Loop přes počet recenzí podle nastaveného počtu z customizeru
-    $count = get_theme_mod('custom_reviews_count', 3);
-    for ($i = 1; $i <= $count; $i++) {
-        
-        $wp_customize->add_setting("custom_review_image_$i", array(
-            'sanitize_callback' => 'esc_url_raw', // Očistí URL
-        ));
-
-        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "custom_review_image_$i", array(
-            'label' => "Obrázek recenze $i", // Název pole
-            'section' => 'custom_fitness_reviews', // Přiřazení k nové sekci
-            'settings' => "custom_review_image_$i", // Přiřazení k nastavení
-        )));
-
-        $wp_customize->add_setting("custom_review_firstname_$i", array(
-            'sanitize_callback' => 'sanitize_text_field', // Očistí textové pole od nežádoucích znaků
-        ));
-
-        $wp_customize->add_control("custom_review_firstname_$i", array(
-            'label' => "Křestní jméno recenze $i", // Název pole
-            'section' => 'custom_fitness_reviews', // Přiřazení k nové sekci
-            'type' => 'text',
-        ));
-
-        $wp_customize->add_setting("custom_review_lastname_$i", array(
-            'sanitize_callback' => 'sanitize_text_field', // Očistí textové pole od nežádoucích znaků
-        ));
-
-        $wp_customize->add_control("custom_review_lastname_$i", array(
-            'label' => "Příjmení recenze $i", // Název pole
-            'section' => 'custom_fitness_reviews', // Přiřazení k nové sekci
-            'type' => 'text',
-        ));
-
-        $wp_customize->add_setting("custom_review_text_$i", array(
-            'sanitize_callback' => 'sanitize_textarea_field', // Očistí textovou oblast od nežádoucích znaků
-        ));
-
-        $wp_customize->add_control("custom_review_text_$i", array(
-            'label' => "Text recenze $i", // Název pole
-            'section' => 'custom_fitness_reviews', // Přiřazení k nové sekci
-            'type' => 'textarea',
-        ));
-    }
-}
-add_action('customize_register', 'customizer_fitness_reviews_section');
-
 
 /** gallery */
 function fitness_customizer_settings($wp_customize) {
@@ -346,7 +278,7 @@ function fitness_trainers_slider_shortcode() {
     <section aria-label="Trenéři +fitness" class="custom-trainers">
         <header class="container">
             
-            <h2 class="custom-trainers_title">Naši <b class="accent-text">Trenéři</b></h2>
+            <h2 class="custom-trainers_title">Naši <b class="accent-text">trenéři</b></h2>
 
             <span class="custom-trainers_undertitle">S našimi trenéry dosáhnete svých cílů s jistotou a profesionálním vedením.</span>
 
@@ -422,136 +354,6 @@ function fitness_trainers_slider_shortcode() {
 add_shortcode('fitness_trainers_slider', 'fitness_trainers_slider_shortcode');
 
 
-/** reviews shortcode */
-function fitness_reviews_shortcode() {
-    ob_start(); 
-    ?>
-
-    <aside class="reviews" aria-label="recenze" title="reviews">
-        <div class="container">
-            <header class="reviews-introduction" >
-                
-                <h2 class="reviews_title">Co o nás říkají <b class="accent-text">naši zákazníci</b></h2>
-            
-                <p class="reviews_paragraph">Níže najdete několik referencí od našich klientů, kteří nám důvěřovali a dosáhli skvělých výsledků. Přečtěte si jejich zkušenosti a motivujte se k vlastnímu úspěchu. Recenze jsou přímo z našeho <a href="https://www.facebook.com/plusfitko/reviews" target="_blank" aria-label="Odkaz na sekci s recenzemi z naší Facebook stránky."> Facebooku</a></p>
-            
-            </header>
-            <div class="reviews_slider swiper">
-
-                <div class="swiper-wrapper reviews-wrapper">
-
-        <?php 
-
-            $count = get_theme_mod('custom_reviews_count', 3); // Získáme nastavený počet recenzí z customizeru
-
-            for ($i = 1; $i <= $count; $i++) {
-                $image_url = get_theme_mod("custom_review_image_$i");
-                $review_firstname = get_theme_mod("custom_review_firstname_$i");
-                $review_lastname = get_theme_mod("custom_review_lastname_$i");
-                $review_text = get_theme_mod("custom_review_text_$i");
-
-                // Zkontrolujeme, zda máme dostatečné informace o recenzi
-                if ($image_url && $review_firstname && $review_lastname && $review_text) {
-                ?>    
-                    <div class="review swiper-slide">
-                        
-                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($review_firstname . ' ' . $review_lastname); ?>">
-                        <div class="reviews_text">
-
-                            <header class="reviews-headline">
-                                
-                                <h3><?php echo wp_kses_post($review_firstname . ' <b class="accent-text">' . $review_lastname . '</b>'); ?></h3>
-                                
-                                <figure class="review-figure">
-                                    
-                                    <img class="reviews-approval" src="<?php echo get_template_directory_uri(); ?>/assets/img/recommend.png" alt="<?php echo esc_attr($review_firstname . ' ' . $review_lastname); ?> doporučuje Plus Fitness">
-                                    
-                                    <figcaption>Doporučuje Plus Fitness</figcaption>
-                                
-                                </figure>
-                            
-                            </header>
-                            
-                            <p><?php echo esc_html($review_text); ?></p>
-                        
-                        </div>
-                        
-                    </div>
-                
-                <?php
-                    }
-                }
-
-            ?>      
-                </div>
-                <div class="swiper-pagination reviews-pagination"></div>
-            </div>
-            
-            <div class="review-responsive swiper">
-
-                <div class="swiper-wrapper reviews-wrapper">
-
-                <?php
-
-            $count = get_theme_mod('custom_reviews_count', 3); // Získáme nastavený počet recenzí z customizeru
-
-            for ($i = 1; $i <= $count; $i++) {
-                $image_url = get_theme_mod("custom_review_image_$i");
-                $review_firstname = get_theme_mod("custom_review_firstname_$i");
-                $review_lastname = get_theme_mod("custom_review_lastname_$i");
-                $review_text = get_theme_mod("custom_review_text_$i");
-
-                // Zkontrolujeme, zda máme dostatečné informace o recenzi
-                if ($image_url && $review_firstname && $review_lastname && $review_text) {
-                ?>
-
-
-                    <div class="review swiper-slide">
-                        
-                        <img src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($review_firstname . ' ' . $review_lastname); ?>">
-                        <div class="reviews_text">
-
-                            <header class="reviews-headline">
-                                
-                                <h3><?php echo wp_kses_post($review_firstname . ' <b class="accent-text">' . $review_lastname . '</b>'); ?></h3>
-                                
-                                <figure class="review-figure">
-                                    
-                                    <img class="reviews-approval" src="<?php echo get_template_directory_uri(); ?>/assets/img/recommend.png" alt="<?php echo esc_attr($review_firstname . ' ' . $review_lastname); ?> doporučuje Plus Fitness">
-                                    
-                                    <figcaption>Doporučuje Plus Fitness</figcaption>
-                                
-                                </figure>
-                            
-                            </header>
-                            
-                            <p><?php echo esc_html($review_text); ?></p>
-                        
-                        </div>
-                        
-                    </div>
-
-                    <?php
-                }
-            }
-
-            ?>        
-
-                </div>
-                <div class="swiper-pagination reviews-pagination"></div>
-            </div>
-                
-        </div>
-    </aside>
-    
-    
-    
-    <?php
-    return ob_get_clean();
-};
-
-add_shortcode('fitness_reviews', 'fitness_reviews_shortcode');
-
 /** gallery shortcode */
 function display_gallery() {
     ob_start();
@@ -608,24 +410,6 @@ function display_price_list(){
             <header>
                 
                 <h2 id="price_title">Kolik to u <b class="accent-text" > nás stojí</b></h2>
-
-                <p>
-                    V rámci individuálního cvičení můžete využívat posilovnu, spinning, kardio a tělocvičnu.
-                    <br> Individuální cvičení je možné hradit také z benefitní karty Multisport nebo Edenred. <br>
-                    Ceny jsou uvedeny v kreditech. 
-                    Platí 1 kredit = 1 Kč.
-                </p>
-
-                <span id="credit-btn">Jak kredity uhradit -></span>
-
-                <div class="credit-info" id="credit-text">
-                    <h4>Kredity je možné uhradit:</h4>
-                    <ul>
-                        <li>a ) V hotovosti nebo platební kartou na recepci fitness.</li>
-                        <li>b ) Převodním příkazem z účtu klienta na účet: 11111 (do poznámky je třeba uvést email klienta nebo celé jméno z rezervačního systému, aby bylo možné platbu přiřadit ke konkrétnímu uživatelskému účtu).</li>
-                    </ul>
-                </div>
-
             
             </header>
 
@@ -891,8 +675,52 @@ function display_price_list(){
 
                 </div>
 
-
             </div>
+
+                
+            <span id="credit-btn">Pravidla skupinových cvičení -></span>
+
+            <div class="credit-info" id="credit-text">
+
+                <div class="credit-wrapper">
+                    
+                    <h4 class="credit-pay_title">Pravidla:</h4>
+        
+                    <ul class="credit-pay_list">
+
+                        <li>1. Cvičení se uskuteční pokud 2 hod před začátkem lekce je přihlášen  min.počet účastníků (číslo v závorce). Při zrušení se kredity vrací automaticky a zasíláme informační SMS.</li>
+
+                        <li>2. Rezervaci na cvičení lze zrušit nejpozději 6 hod před začátkem lekce s vrácením kreditů. Po té již nelze kredity vracet.</li>
+
+                        <li>3. Rezervaci lze vytvořit přes rezervační systém na našich webových stránkách, telefonicky pokud máte na účtě dostatečný počet kreditů a nebo osobně zaplacením na recepci. Rezervaci nelze vytvořit bez předplacení.</li>
+
+                        <li>4. Na lekci je možno přijít i bez rezervace, ale na vlastní riziko, že může být již plno nebo naopak lekce je pro malý počet rezervací zrušená.</li>
+
+                    </ul>
+                
+                </div>
+
+                
+                
+                <div class="credit-wrapper">
+                    
+                    <h4 class="credit-pay_title">Kredity je možné uhradit:</h4>
+        
+                    <ul class="credit-pay_list">
+
+                        <li>a ) V hotovosti nebo platební kartou na recepci fitness.</li>
+
+                        <li>b ) Převodním příkazem z účtu klienta na účet: 11111 (do poznámky je třeba uvést email klienta nebo celé jméno z rezervačního systému, aby bylo možné platbu přiřadit ke konkrétnímu uživatelskému účtu).</li>
+
+                    </ul>
+                
+                </div>
+        
+                
+        
+            </div>
+
+            
 
         </div>
     
@@ -1014,7 +842,7 @@ function display_schedule_shortcode() {
 
         <div class="container">
 
-            <h2 id="schedule-title">Skupinová cvičení pro <b class="accent-text">Srpen</b></h2>
+            <h2 id="schedule-title">Skupinová cvičení <b class="accent-text">Srpen</b></h2>
 
             <div class="schedule-wrapper">
                 

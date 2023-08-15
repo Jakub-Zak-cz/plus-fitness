@@ -699,6 +699,13 @@ body {
     padding: 180px 0;
 }
 
+.price-list .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .price-list .container header {
     display: flex;
     align-items: center;
@@ -821,21 +828,24 @@ body {
 }
 
 /** how to pay credit */
+
+
 .credit-info {
+  margin-top: 50px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 1.4s ease;
 }
 
 .credit-info p,
-.credit-info ul {
+.credit-pay_list {
   padding: 0;
   margin: 0;
 }
 
-.credit-info ul {
+.credit-pay_list {
   list-style: none;
-  padding-left: 1.2rem;
+  margin-bottom: 100px;
 }
 
 #credit-btn {
@@ -843,6 +853,9 @@ body {
   font-size: var(--visible-b-text);
   color: var(--accent-color);
   text-decoration: underline;
+  text-align: center;
+  display: block;
+  margin-top: 100px;
 }
 
 #credit-text {  
@@ -855,7 +868,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column; 
+  flex-direction: column;
   max-height: 300px; /* Nebo jakoukoliv jinou výšku potřebujete */
   animation: fade 0.5s ease-in-out; /* Přidáme stejnou animaci jako u FAQ bloků */
 }
@@ -876,14 +889,14 @@ body {
   transition: max-height 1.4s ease;
 }
 
-.credit-info h4 {
+.credit-pay_title {
     font-size: var(--visible-b-text);
-    text-align: center;
     margin-bottom: 40px;
 }
 
-.credit-info ul li {
+.credit-pay_list li {
     font-size: var(--body-text);
+    margin-bottom: 25px;
 }
 /** home-page code end */
 /** instruktors code */
@@ -945,7 +958,7 @@ body {
 .visible-headline {
     font-size: var(--visible-b-text);
     color: var(--main-color);
-    text-transform: capitalize;
+    /* text-transform: capitalize; */
 }
 
 .more {
@@ -1696,6 +1709,11 @@ footer .container {
 
     .price-list .container header p {
         font-size: 14px;
+    }
+
+    /** credit */
+    .credit-pay_list li {
+        margin-bottom: 50px;
     }
 
     /** schedule post */

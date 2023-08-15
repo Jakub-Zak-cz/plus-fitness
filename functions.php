@@ -537,7 +537,7 @@ function display_price_list(){
 
                     </div>
 
-                    <div class="price-block accent-price-block">
+                    <div class="price-block accent-price-block shadow">
 
                         <span class="price-span">Cvičení s osobním trenérem</span>
 
@@ -760,8 +760,8 @@ function fitness_lekce_shortcode($atts) {
 
         $output .= '</div>';
 
-        if ($name === 'fitness_trenér') {
-            $output .= '<div class="more" id="fitness-training">'; // instead of answer 
+        if ($name === 'Fitness_trenér') {
+            $output .= '<div class="more fitness-training">'; // instead of answer 
         } else {
             $output .= '<div class="more">'; // instead of answer 
         }

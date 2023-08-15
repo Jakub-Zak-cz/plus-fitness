@@ -684,7 +684,7 @@ function display_price_list(){
 
                 <div class="credit-wrapper">
                     
-                    <h4 class="credit-pay_title">Pravidla:</h4>
+                    <h3 class="credit-pay_title">Pravidla:</h3>
         
                     <ul class="credit-pay_list">
 
@@ -704,7 +704,7 @@ function display_price_list(){
                 
                 <div class="credit-wrapper">
                     
-                    <h4 class="credit-pay_title">Kredity je možné uhradit:</h4>
+                    <h3 class="credit-pay_title">Kredity je možné uhradit:</h3>
         
                     <ul class="credit-pay_list">
 

@@ -10,7 +10,7 @@
 
 <header id="primary-header" class="shadow" >
     <div class="nav-logo">
-            <a href="<?php echo home_url(); ?>">
+            <a aria-label="odkaz na domácí stránku" href="<?php echo home_url(); ?>">
                 <?php if (has_custom_logo()) {
                     the_custom_logo();
                 } ?>

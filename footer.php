@@ -53,7 +53,7 @@
 
         <a target="_blank" id="need-trainers" href="<?php echo home_url() ; ?>/instruktori#need-instruktors">Hledáme nové instruktory</a>
 
-        <a target="_blank" id="contract" href="#">Provozní řád a obchodní podmínky</a>
+        <a target="_blank" id="contract" href="<?php echo home_url() ; ?>/provozni-rad-a-obchodni-podminky">Provozní řád a obchodní podmínky</a>
       
       </div>
     
@@ -75,7 +75,7 @@
 
   <h2 id="location" class="footer-location shadow">Kde nás najdete - Masarykovo náměstí 93, Rokycany</h2>
 
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d644.5797568992243!2d13.595409317254742!3d49.74244076028785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470afc9b5b87c233%3A0xa2639dbe41b0bc4a!2sPlus%20fitness!5e0!3m2!1scs!2scz!4v1690977513699!5m2!1scs!2scz" width="100%" height="750px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <iframe title="+Fitness na mapách Google" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d644.5797568992243!2d13.595409317254742!3d49.74244076028785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470afc9b5b87c233%3A0xa2639dbe41b0bc4a!2sPlus%20fitness!5e0!3m2!1scs!2scz!4v1690977513699!5m2!1scs!2scz" width="100%" height="750px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   
   <div class="copyright container">
     

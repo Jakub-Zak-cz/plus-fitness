@@ -716,8 +716,6 @@ function display_price_list(){
                 
                 </div>
         
-                
-        
             </div>
 
             

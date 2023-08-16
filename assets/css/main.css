@@ -1150,6 +1150,7 @@ footer .container {
     background: var(--accent-color);
     color: var(--main-color);
     font-size: var(--headline);
+    font-weight: var(--mont-bold);
 }
 
 .trainer {

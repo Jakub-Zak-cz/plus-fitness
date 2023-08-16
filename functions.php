@@ -710,7 +710,7 @@ function display_price_list(){
 
                         <li>a ) V hotovosti nebo platební kartou na recepci fitness.</li>
 
-                        <li>b ) Převodním příkazem z účtu klienta na účet: 11111 (do poznámky je třeba uvést email klienta nebo celé jméno z rezervačního systému, aby bylo možné platbu přiřadit ke konkrétnímu uživatelskému účtu).</li>
+                        <li>b ) Převodním příkazem z účtu klienta na účet: 317137611/0300 (do poznámky je třeba uvést email klienta nebo celé jméno z rezervačního systému, aby bylo možné platbu přiřadit ke konkrétnímu uživatelskému účtu).</li>
 
                     </ul>
                 

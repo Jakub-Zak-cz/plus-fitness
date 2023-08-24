@@ -32,12 +32,15 @@ function fitness_assets() {
 
 add_action( 'wp_enqueue_scripts', 'fitness_assets' );
 
+$fitness_trainer_name = "";
+$fitness_schedule_time = "";
+
 /** Customizer */
 /** Trainers Customizer */
 function custom_theme_register_customizer_sections($wp_customize) {
     // Vytvoříme novou sekci pro trenéry
     $wp_customize->add_section('custom_trainer', array(
-        'title' => 'Trenéři',
+        'title' => 'Instruktoři slider',
         'priority' => 30,
     ));
 
@@ -139,12 +142,13 @@ function fitness_customizer_settings($wp_customize) {
         'type' => 'number',
         'input_attrs' => array(
             'min' => 1,
-            'max' => 10, // Můžete upravit maximální počet obrázků, pokud chcete
         ),
     ));
 
+    $fitness_gallery_count = get_theme_mod('fitness_gallery_count');
+
     // Pole pro každý obrázek v galerii
-    for ($i = 1; $i <= 10; $i++) { // Uvádíme maximální počet obrázků, který může být v galerii (zde 10)
+    for ($i = 1; $i <= $fitness_gallery_count; $i++) { // Uvádíme maximální počet obrázků, který může být v galerii (zde 10)
         $wp_customize->add_setting("fitness_gallery_image_$i", array(
             'default' => '',
             'sanitize_callback' => 'esc_url_raw', // Očistí URL obrázku
@@ -167,65 +171,166 @@ function fitness_price_list($wp_customize) {
         'priority' => 30, // Pořadí sekce
     ));
 
-    // Pole s hodnotami pro ceník pro dospělé
-    $adult_options = array(
-        'once' => 'Jednorazovy',
-        'one-month' => '1 měsíc',
-        'two-months' => '2 měsíce',
-        'three-months' => '3 měsíce',
-        'half-year' => 'Půl roku',
-        'one-year' => 'Jeden Rok',
-        '10-entries' => '10 vstupů',
-        '20-entries' => '20 vstupů',
-        '30-entries' => '30 vstupů',
-        'group' => 'Skupina',
-        'personal' => 'Osobní Trenér',
-    );
+    $wp_customize->add_setting('adults_count', array(
+        'default' => 1,
+        'sanitize_callback' => 'absint', // Očistí hodnotu a převede ji na celé číslo
+    ));
 
-    // Pole s hodnotami pro ceník pro studenty
-    $student_options = array(
-        'once-student' => 'Jednorazovy Student',
-        'one-month-student' => '1 měsíc Student',
-        'two-months-student' => '2 měsíce Student',
-        'three-months-student' => '3 měsíce Student',
-        'half-year-student' => 'Půl roku Student',
-        'one-year-student' => 'Jeden Rok Student',
-        '10-entries-student' => '10 vstupů Student',
-        '20-entries-student' => '20 vstupů Student',
-        '30-entries-student' => '30 vstupů Student',
-        'group-student' => 'Skupina Student',
-        'personal-student' => 'Osobní Trenér Student',
-    );
+    $wp_customize->add_control('adults_count', array(
+        'label' => __('Počet cenových možností', 'fitness'),
+        'section' => 'cenik',
+        'type' => 'number',
+        'input_attrs' => array(
+            'min' => 1,
+        ),
+    ));
 
-    // Přidáme textová pole pro jednotlivé hodnoty pro ceník pro dospělé
-    foreach ($adult_options as $option_key => $option_label) {
-        $wp_customize->add_setting($option_key, array(
+    // Proměnná by měla být definovaná až po těchto řádcích
+    $adults_tags_count = get_theme_mod('adults_count');
+
+    for ($i = 1; $i <= $adults_tags_count; $i++) { 
+
+        $wp_customize->add_setting("adults_count_first_h_$i", array(
             'default' => '',
-            'type' => 'option', // Uložení hodnoty jako volbu v databázi
-            'sanitize_callback' => 'wp_kses_post', // Očištění hodnoty
+            'sanitize_callback' => 'wp_kses_post'
         ));
 
-        $wp_customize->add_control($option_key, array(
-            'label' => $option_label, // Popisek pole
-            'section' => 'cenik', // Sekce, do které pole patří
-            'type' => 'text', // Typ pole
+        $wp_customize->add_control("adults_count_first_h_$i", array(
+            'label' => "Pokud permanentka $i", 
+            'section' => 'cenik', 
+            'type' => 'text', 
         ));
-    }
 
-    // Přidáme textová pole pro jednotlivé hodnoty pro ceník pro studenty
-    foreach ($student_options as $option_key => $option_label) {
-        $wp_customize->add_setting($option_key, array(
+        $wp_customize->add_setting("adults_count_second_h_$i", array(
             'default' => '',
-            'type' => 'option', // Uložení hodnoty jako volbu v databázi
-            'sanitize_callback' => 'sanitize_text_field', // Očištění hodnoty
+            'sanitize_callback' => 'wp_kses_post'
         ));
 
-        $wp_customize->add_control($option_key, array(
-            'label' => $option_label, // Popisek pole
-            'section' => 'cenik', // Sekce, do které pole patří
-            'type' => 'text', // Typ pole
+        $wp_customize->add_control("adults_count_second_h_$i", array(
+            'label' => "Čas $i", 
+            'section' => 'cenik', 
+            'type' => 'text', 
         ));
-    }
+
+        $wp_customize->add_setting("adults_count_third_h_$i", array(
+            'default' => '',
+            'sanitize_callback' => 'wp_kses_post'
+        ));
+
+        $wp_customize->add_control("adults_count_third_h_$i", array(
+            'label' => "Cena $i", 
+            'section' => 'cenik', 
+            'type' => 'text', 
+        ));
+
+    };
+
+    $wp_customize->add_setting('students_count', array(
+        'default' => 1,
+        'sanitize_callback' => 'absint', // Očistí hodnotu a převede ji na celé číslo
+    ));
+
+    $wp_customize->add_control('students_count', array(
+        'label' => __('Počet cenových možností pro studenty', 'fitness'),
+        'section' => 'cenik',
+        'type' => 'number',
+        'input_attrs' => array(
+            'min' => 1,
+        ),
+    ));
+
+    // Proměnná by měla být definovaná až po těchto řádcích
+    $students_tags_count = get_theme_mod('students_count');
+
+    for ($i = 1; $i <= $students_tags_count; $i++) { 
+
+        $wp_customize->add_setting("students_count_first_h_$i", array(
+            'default' => '',
+            'sanitize_callback' => 'wp_kses_post'
+        ));
+
+        $wp_customize->add_control("students_count_first_h_$i", array(
+            'label' => "Pokud permanentka pro studenty $i", 
+            'section' => 'cenik', 
+            'type' => 'text', 
+        ));
+
+        $wp_customize->add_setting("students_count_second_h_$i", array(
+            'default' => '',
+            'sanitize_callback' => 'wp_kses_post'
+        ));
+
+        $wp_customize->add_control("students_count_second_h_$i", array(
+            'label' => "Čas pro studenty $i", 
+            'section' => 'cenik', 
+            'type' => 'text', 
+        ));
+
+        $wp_customize->add_setting("students_count_third_h_$i", array(
+            'default' => '',
+            'sanitize_callback' => 'wp_kses_post'
+        ));
+
+        $wp_customize->add_control("students_count_third_h_$i", array(
+            'label' => "Cena pro studenty $i", 
+            'section' => 'cenik', 
+            'type' => 'text', 
+        ));
+
+    };
+
+    // group training adults
+
+    $wp_customize->add_setting("group_adults", array(
+        'default' => '',
+        'sanitize_callback' => 'wp_kses_post'
+    ));
+
+    $wp_customize->add_control("group_adults", array(
+        'label' => "Skupinová cvičení s instruktorem pro dospělé cena", 
+        'section' => 'cenik', 
+        'type' => 'text', 
+    ));
+
+    // group training students
+
+    $wp_customize->add_setting("group_students", array(
+        'default' => '',
+        'sanitize_callback' => 'wp_kses_post'
+    ));
+
+    $wp_customize->add_control("group_students", array(
+        'label' => "Skupinová cvičení s instruktorem pro studenty cena", 
+        'section' => 'cenik', 
+        'type' => 'text', 
+    ));
+
+    // personal trainer adults
+
+    $wp_customize->add_setting("personal_adult", array(
+        'default' => '',
+        'sanitize_callback' => 'wp_kses_post'
+    ));
+
+    $wp_customize->add_control("personal_adult", array(
+        'label' => "Osobní trenér pro dospělé cena", 
+        'section' => 'cenik', 
+        'type' => 'text', 
+    ));
+
+    // personal trainer student
+
+    $wp_customize->add_setting("personal_student", array(
+        'default' => '',
+        'sanitize_callback' => 'wp_kses_post'
+    ));
+
+    $wp_customize->add_control("personal_student", array(
+        'label' => "Osobní trenér pro studenty cena", 
+        'section' => 'cenik', 
+        'type' => 'text', 
+    ));
+    
 }
 
 add_action('customize_register', 'fitness_price_list');
@@ -238,15 +343,18 @@ function fitness_trainings($wp_customize) {
         'priority' => 30, // Pořadí sekce
     ));
 
-    // Pole s hodnotami pro Lekce
-    $lekce_options = array(
+     // Pole s hodnotami pro Lekce
+     $lekce_options = array(
         'spinning' => 'Spinning',
         'kruhovy_trenink' => 'Kruhový Trénink',
         'trampoliny' => 'Trampolíny',
         'fitness_trener' => 'Osobní Fitness Trenér',
         'pevne_telo' => 'Pevné Tělo',
         'bodyforming' => 'BodyForming',
-        'spalovacka' => 'Spalovačka'
+        'spalovacka' => 'Spalovačka',
+        'nova_lekce_1' => 'nova_lekce_1',
+        'nova_lekce_2' => 'nova_lekce_2',
+        'nova_lekce_3' => 'nova_lekce_3'
     );
 
     // Přidáme textová pole pro jednotlivé hodnoty Lekce
@@ -262,11 +370,63 @@ function fitness_trainings($wp_customize) {
             'section' => 'fitness_lekce', // Sekce, do které pole patří
             'type' => 'textarea', // Typ pole
         ));
-    }
+    } 
 }
 
 add_action('customize_register', 'fitness_trainings');
 
+
+function trainers_tags($wp_customize) {
+    
+    $wp_customize->add_section('trainers_tags', array(
+        'title' => __('Instruktoři pro lekce'),
+        'priority' => 30,
+    ));
+
+    $wp_customize->add_setting('trainers_tags_count', array(
+        'default' => 1,
+        'sanitize_callback' => 'absint', // Očistí hodnotu a převede ji na celé číslo
+    ));
+
+    $wp_customize->add_control('trainers_tags_count', array(
+        'label' => __('Počet instruktorů', 'fitness'),
+        'section' => 'trainers_tags',
+        'type' => 'number',
+        'input_attrs' => array(
+            'min' => 1,
+        ),
+    ));
+
+    // Proměnná by měla být definovaná až po těchto řádcích
+    $trainers_tags_count = get_theme_mod('trainers_tags_count');
+
+    for ($i = 1; $i <= $trainers_tags_count; $i++) {
+        
+        $wp_customize->add_setting("trainers_tags_name$i", array(
+            'default' => '',
+            'sanitize_callback' => 'wp_kses_post'
+        ));
+
+        $wp_customize->add_control("trainers_tags_name$i", array(
+            'label' => "Jméno trenéra $i", 
+            'section' => 'trainers_tags', 
+            'type' => 'textarea', 
+        ));
+
+        $wp_customize->add_setting("trainers_tags_image$i", array(
+            'default' => '',
+            'sanitize_callback' => 'esc_url_raw',
+        ));
+
+        $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "trainers_tags_image$i", array(
+            'label' => "Obrázek pro trenéra $i",
+            'section' => 'trainers_tags',
+            'settings' => "trainers_tags_image$i",
+        )));
+    }
+};
+
+add_action('customize_register', 'trainers_tags');
 
 
 /** shortcode */
@@ -275,12 +435,12 @@ function fitness_trainers_slider_shortcode() {
     ob_start(); // Zahájení vyrovnávací paměti
     ?>
 
-    <section aria-label="Trenéři +fitness" class="custom-trainers">
+    <section aria-label="Trenéři +fitness" class="custom-trainers" id="trainers" >
         <header class="container">
             
             <h2 class="custom-trainers_title">Naši <b class="accent-text">trenéři</b></h2>
 
-            <span class="custom-trainers_undertitle">S našimi trenéry dosáhnete svých cílů s jistotou a profesionálním vedením.</span>
+            <span class="custom-trainers_undertitle">S našimi trenéry dosáhnete svých cílů s jistotou pod profesionálním vedením.</span>
 
         </header>
 
@@ -358,7 +518,7 @@ add_shortcode('fitness_trainers_slider', 'fitness_trainers_slider_shortcode');
 function display_gallery() {
     ob_start();
     ?>
-    <section class="fitness-gallery" aria-label="Galerie obrázků prostorů našeho fitness">
+    <section id="galerie" class="fitness-gallery" aria-label="Galerie obrázků prostorů našeho fitness">
         
         <h2 class="gallery-title">Galerie</h2>
         
@@ -403,7 +563,7 @@ function display_price_list(){
     ob_start();
     ?>
 
-    <section class="price-list" aria-labelledby="#price_title" >
+    <section class="price-list" aria-labelledby="#price_title" id="cenik" >
         
         <div class="container">
 
@@ -428,102 +588,23 @@ function display_price_list(){
 
                 <?php
                 // addults
-                    $one_entry = get_option('once');
-                    $one_month = get_option('one-month');
-                    $two_months = get_option('two-months');
-                    $three_months = get_option('three-months');
-                    $half_year = get_option('half-year');
-                    $one_year = get_option('one-year');
-                    $entries_10 = get_option('10-entries');
-                    $entries_20 = get_option('20-entries');
-                    $entries_30 = get_option('30-entries');
-                    $group = get_option('group');
-                    $personal = get_option('personal');
+                $adults_tags_count = get_theme_mod('adults_count', 1);
+
+                for ($i = 1; $i <= $adults_tags_count; $i++) { 
+                    $first_headline = get_theme_mod("adults_count_first_h_$i");
+                    $second_headline = get_theme_mod("adults_count_second_h_$i");
+                    $third_headline = get_theme_mod("adults_count_third_h_$i");
+
+                    if (!empty($third_headline)) {
+                        echo '<div class="price-block">';
+                        echo '<span class="price-span">' . esc_html($first_headline) . '</span>';
+                        echo '<span class="price-span">' . esc_html($second_headline) . '</span>';
+                        echo '<span class="price">' . esc_html($third_headline) . '</span>';
+                        echo '</div>';
+                    }
+                }
+
                 ?>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Jednorázový vstup</span>
-
-                        <span class="price"><?php echo esc_html($one_entry); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">1 měsíc</span>
-
-                        <span class="price"><?php echo esc_html($one_month); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">2 měsíce</span>
-
-                        <span class="price"><?php echo esc_html($two_months); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">3 měsíce</span>
-
-                        <span class="price"><?php echo esc_html($three_months); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">6 měsíců</span>
-
-                        <span class="price"><?php echo esc_html($half_year); ?></span>
-
-                    </div> 
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">1 Rok</span>
-
-                        <span class="price"><?php echo esc_html($one_year); ?></span>
-
-                    </div>
-                    
-                    
-                    <div class="price-block">
-
-                        <span class="price-span">10 vstupů</span>
-
-                        <span class="price"><?php echo esc_html($entries_10); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">20 vstupů</span>
-
-                        <span class="price"><?php echo esc_html($entries_20); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">30 vstupů</span>
-
-                        <span class="price"><?php echo esc_html($entries_30); ?></span>
-
-                    </div>
-
                     <div class="price-block accent-price-block shadow" id="group-training" >
 
                         <span class="price-span">
@@ -533,7 +614,7 @@ function display_price_list(){
 
                         <span class="price-span">1 hodina</span>
 
-                        <span class="price"><?php echo esc_html($group); ?></span>
+                        <span class="price"><?php echo get_theme_mod('group_adults'); ?></span>
 
                     </div>
 
@@ -543,7 +624,7 @@ function display_price_list(){
 
                         <span class="price-span">1 hodina</span>
 
-                        <span class="price"><?php echo esc_html($personal); ?></span>
+                        <span class="price"><?php echo get_theme_mod('personal_adult'); ?></span>
 
                     </div>
 
@@ -554,103 +635,24 @@ function display_price_list(){
 
                     <?php
                     // students
-                    $one_entry_student = get_option('once-student');
-                    $one_month_student = get_option('one-month-student');
-                    $two_months_student = get_option('two-months-student');
-                    $three_months_student = get_option('three-months-student');
-                    $half_year_student = get_option('half-year-student');
-                    $one_year_student = get_option('one-year-student');
-                    $entries_10_student = get_option('10-entries-student');
-                    $entries_20_student = get_option('20-entries-student');
-                    $entries_30_student = get_option('30-entries-student');
-                    $group_student = get_option('group-student');
-                    $personal_student = get_option('personal-student');
+                    $students_tags_count = get_theme_mod('students_count', 1);
 
+                    for ($i = 1; $i <= $students_tags_count; $i++) { 
+                        $first_headline = get_theme_mod("students_count_first_h_$i");
+                        $second_headline = get_theme_mod("students_count_second_h_$i");
+                        $third_headline = get_theme_mod("students_count_third_h_$i");
+
+                        if ( !empty($third_headline)) {
+                            echo '<div class="price-block">';
+                            echo '<span class="price-span">' . esc_html($first_headline) . '</span>';
+                            echo '<span class="price-span">' . esc_html($second_headline) . '</span>';
+                            echo '<span class="price">' . esc_html($third_headline) . '</span>';
+                            echo '</div>';
+                        }
+                    }
                     ?>
 
-                    <div class="price-block">
-
-                        <span class="price-span">Jednorázový vstup</span>
-
-                        <span class="price"><?php echo esc_html($one_entry_student); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">1 měsíc</span>
-
-                        <span class="price"><?php echo esc_html($one_month_student); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">2 měsíce</span>
-
-                        <span class="price"><?php echo esc_html($two_months_student); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">3 měsíce</span>
-
-                        <span class="price"><?php echo esc_html($three_months_student); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">6 měsíců</span>
-
-                        <span class="price"><?php echo esc_html($half_year_student); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">Permanentka</span>
-
-                        <span class="price-span">1 Rok</span>
-
-                        <span class="price"><?php echo esc_html($one_year_student); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">10 vstupů</span>
-
-                        <span class="price"><?php echo esc_html($entries_10_student); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">20 vstupů</span>
-
-                        <span class="price"><?php echo esc_html($entries_20_student); ?></span>
-
-                    </div>
-
-                    <div class="price-block">
-
-                        <span class="price-span">30 vstupů</span>
-
-                        <span class="price"><?php echo esc_html($entries_30_student); ?></span>
-
-                    </div>
-
-                    <div class="price-block accent-price-block">
+                    <div class="price-block accent-price-block shadow" id="group-training-student" >
 
                         <span class="price-span">
                             Skupinová cvičení
@@ -659,17 +661,17 @@ function display_price_list(){
 
                         <span class="price-span">1 hodina</span>
 
-                        <span class="price"><?php echo esc_html($group_student); ?></span>
+                        <span class="price"><?php echo get_theme_mod('group_students'); ?></span>
 
                     </div>
 
-                    <div class="price-block accent-price-block">
+                    <div class="price-block accent-price-block shadow">
 
                         <span class="price-span">Cvičení s osobním trenérem</span>
 
                         <span class="price-span">1 hodina</span>
 
-                        <span class="price"><?php echo esc_html($personal_student); ?></span>
+                        <span class="price"><?php echo get_theme_mod('personal_student'); ?></span>
 
                     </div>
 
@@ -696,6 +698,8 @@ function display_price_list(){
 
                         <li>4. Na lekci je možno přijít i bez rezervace, ale na vlastní riziko, že může být již plno nebo naopak lekce je pro malý počet rezervací zrušená.</li>
 
+                        <li>5. Na skupinová cvičení se lze přihlásit prostřednictvím <a class="accent-text" href="http://rezervace.plusfitness.cz/" target="_blank" >rezervačního systému.</a></li>
+
                     </ul>
                 
                 </div>
@@ -710,7 +714,7 @@ function display_price_list(){
 
                         <li>a ) V hotovosti nebo platební kartou na recepci fitness.</li>
 
-                        <li>b ) Převodním příkazem z účtu klienta na účet: 317137611/0300 (do poznámky je třeba uvést email klienta nebo celé jméno z rezervačního systému, aby bylo možné platbu přiřadit ke konkrétnímu uživatelskému účtu).</li>
+                        <li>b ) Převodním příkazem z účtu klienta na účet: <b class="accent-text">317137611/0300</b>  (do poznámky je třeba uvést email klienta nebo celé jméno z rezervačního systému, aby bylo možné platbu přiřadit ke konkrétnímu uživatelskému účtu).</li>
 
                     </ul>
                 
@@ -733,7 +737,7 @@ add_shortcode('price_list', 'display_price_list');
 
 function fitness_lekce_shortcode($atts) {
     $atts = shortcode_atts(array(
-        'lekce' => 'spinning,kruhovy_trenink,trampoliny',
+        'lekce' => '',
     ), $atts, 'fitness_lekce');
 
 
@@ -777,18 +781,13 @@ function fitness_lekce_shortcode($atts) {
 add_shortcode('fitness_lekce', 'fitness_lekce_shortcode');
 
 /** recent posts */
-function recent_posts_shortcode($atts) {
-    $atts = shortcode_atts(array(
-        'count' => 4, // Počet zobrazených příspěvků na stránce
-    ), $atts);
-
-    $paged = get_query_var('paged') ? get_query_var('paged') : 1;
+function recent_posts_shortcode() {
+    
     $args = array(
         'post_type' => 'post',
-        'posts_per_page' => $atts['count'],
         'orderby' => 'date',
         'order' => 'DESC',
-        'paged' => $paged,
+        'posts_per_page' => -1,
     );
 
     $query = new WP_Query($args);
@@ -798,28 +797,33 @@ function recent_posts_shortcode($atts) {
     if ($query->have_posts()) {
         while ($query->have_posts()) {
             $query->the_post();
-            $output .= '<div class="post-preview">';
-            $output .= '<a target="_blank" href="' . esc_url(get_permalink()) . '">';
-            $output .= '<div class="thumbnail">' . get_the_post_thumbnail() . '</div>';
-            $output .= '<h3 class="post-title">' . get_the_title() . '</h3>';
-            $output .= '<p class="post-excerpt">' . get_the_excerpt() . '</p>';
-            $output .= '</a>';
-            $output .= '</div>';
+            
+            // Získání tagů příspěvku
+            $post_tags = get_the_tags();
+            $exclude_tags = array('pondeli', 'utery', 'streda', 'ctvrtek', 'patek', 'sobota', 'nedele');
+            
+            // Kontrola, zda příspěvek má některý z vyloučených tagů
+            $skip_post = false;
+            if ($post_tags) {
+                foreach ($post_tags as $tag) {
+                    if (in_array($tag->slug, $exclude_tags)) {
+                        $skip_post = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!$skip_post) {
+                $output .= '<div class="post-preview">';
+                $output .= '<a target="_blank" href="' . esc_url(get_permalink()) . '">';
+                $output .= '<div class="thumbnail">' . get_the_post_thumbnail() . '</div>';
+                $output .= '<h3 class="post-title">' . get_the_title() . '</h3>';
+                $output .= '<p class="post-excerpt">' . get_the_excerpt() . '</p>';
+                $output .= '</a>';
+                $output .= '</div>';
+            }
         }
 
-        // Paginace - pokud je více příspěvků než počet zobrazených na stránce, zobrazíme paginaci
-        if ($query->max_num_pages > 1) {
-            $output .= '<div class="pagination">';
-            $output .= paginate_links(array(
-                'base' => get_pagenum_link(1) . '%_%',
-                'format' => '/page/%#%',
-                'current' => max(1, $paged),
-                'total' => $query->max_num_pages,
-                'prev_text' => __('« Předchozí'),
-                'next_text' => __('Další »'),
-            ));
-            $output .= '</div>';
-        }
     }
 
     $output .= '</div>';
@@ -830,233 +834,222 @@ function recent_posts_shortcode($atts) {
 }
 add_shortcode('recent_posts', 'recent_posts_shortcode');
 
-/** shortcode for showing schedule of trainings */
 
-function display_schedule_shortcode() {
 
-    ob_start(); ?>
+// První shorcode - rozvrch_lekce_shortcode
+function rozvrch_lekce_shortcode($atts) {
+   
+    $a = shortcode_atts(array(
+        'lekce' => '',
+        'den' => "",
+        'instruktor' => '',
+        'cas' => '',
+    ), $atts);
 
+    $description = get_option($a['lekce']);
+
+    if ($a['instruktor'] == 'peta') {
+        $trainer_name = 'péťa';
+    } else {
+        $trainer_name = esc_html($a['instruktor']);
+    }
+
+    $schedule_time = esc_html($a['cas']);
+
+    $tag_name = esc_html($a['den']);
+
+    // Přiřazení tagů k příspěvku
+    $post_id = get_the_ID();
+    wp_set_post_tags($post_id, array($a['cas'], $a['instruktor'], $a['den']));
+
+
+    $trainer_image = '';
+    $instruktori_data = array();
+
+    $trainers_tags_count = get_theme_mod('trainers_tags_count');
+
+    for ($i = 1; $i <= $trainers_tags_count; $i++) {
+        $instruktor_name = get_theme_mod("trainers_tags_name$i");
+        $instruktor_image = get_theme_mod("trainers_tags_image$i");
+
+        if (!empty($instruktor_name) && !empty($instruktor_image)) {
+            $instruktori_data[$instruktor_name] = $instruktor_image;
+        }
+    }  
+
+    if (isset($instruktori_data[$a['instruktor']])) {
+        $trainer_image = $instruktori_data[$a['instruktor']];
+    }
+
+
+    $output = '<article class="schedule_article">
+                <div class="schedule_article-container">
+                    <header class="schedule_header">
+                        <h2 class="schedule_title">' . get_the_title() . '</h2>
+                        <span>' . esc_html($tag_name) . ' ' . esc_html($schedule_time) . '</span>
+                    </header>
+                    <div class="hr"></div>
+                    <div class="schedule-text_container">
+                        <img class="schedule-text_responsive-img" src="' . esc_url($trainer_image) . '" alt="' . esc_attr($trainer_name) . '">
+                        <h3 class="schedule-text_responsive-h3">' . esc_html($trainer_name) . '</h3>
+                        <p class="schedule-text_about">' . esc_html($description) . '</p>
+                        <a href="http://rezervace.plusfitness.cz/" class="btn accent-btn shadow">Chci se rezervovat</a>
+                    </div>
+                </div>
+                <section class="schedule-trainer_section" aria-label="' . esc_html($trainer_name) . '">
+                    <img src="' . esc_url($trainer_image) . '" alt="' . esc_attr($trainer_name) . '">
+                    <h3>' . esc_html($trainer_name) . '</h3>
+                </section>
+            </article>';
+
+    return $output;
+}
+add_shortcode('rozvrch_lekce', 'rozvrch_lekce_shortcode');
+
+// Druhý shorcode - display_schedule_shortcode
+function display_schedule_shortcode($atts) {
+
+    ob_start(); 
+
+    $a = shortcode_atts(array(
+            'mesic' => ''   
+    ), $atts);
+
+    $month = esc_html($a['mesic']);
+   
+    ?>
     <section class="schedule" aria-labelledby="#schedule-title">
-
         <div class="container">
-
-            <h2 id="schedule-title">Skupinová cvičení <b class="accent-text">Srpen</b></h2>
-
+            <h2 id="schedule-title">Skupinová cvičení <b class="accent-text"><?php echo esc_html($month)?></b></h2>
             <div class="schedule-wrapper">
-                
                 <div class="schedule_controls">
+                <button class="schedule-control_toggle active" onclick="toggleSchedule(event, 'schedule-pondeli')">Pondělí</button>
                     
-                    <button class="schedule-control_toggle active" onclick="toggleSchedule(event, 'schedule-monday')">Pondělí</button>
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-utery')">Úterý</button>
                     
-                    <!-- <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-tuesday')">Úterý</button> -->
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-streda')">Středa</button>
                     
-                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-wednesday')">Středa</button>
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-ctvrtek')">Čtvrtek</button>
                     
-                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-thursday')">Čtvrtek</button>
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-patek')">Pátek</button>
                     
-                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-friday')">Pátek</button>
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-sobota')">Sobota</button>
                     
-                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-saturday')">Sobota</button>
-                    
-                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-sunday')">Neděle</button>
+                    <button class="schedule-control_toggle"  onclick="toggleSchedule(event, 'schedule-nedele')">Neděle</button>
 
                     <!-- responsive version -->
 
-                    <button class="schedule-control_toggle schedule-control_responsive active" onclick="toggleSchedule(event, 'schedule-monday')">Po</button>
+                    <button class="schedule-control_toggle schedule-control_responsive active" onclick="toggleSchedule(event, 'schedule-pondeli')">Po</button>
                     
-                    <!-- <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-tuesday')">Út</button> -->
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-utery')">Út</button>
                     
-                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-wednesday')">St</button>
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-streda')">St</button>
                     
-                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-thursday')">Čt</button>
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-ctvrtek')">Čt</button>
                     
-                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-friday')">Pá</button>
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-patek')">Pá</button>
                     
-                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-saturday')">So</button>
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-sobota')">So</button>
                     
-                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-sunday')">Ne</button>
-                
+                    <button class="schedule-control_toggle schedule-control_responsive"  onclick="toggleSchedule(event, 'schedule-nedele')">Ne</button>
                 </div>
 
-                <div id="schedule-monday" class="schedule-content active">
+                <?php               
 
-                    <div class="schedule-cart">
+                $tags = array('pondeli', 'utery', 'streda', 'ctvrtek', 'patek', 'sobota', 'nedele');
 
-                        <span class="schedule-name">Michal</span>
-
-                        <span class="schedule-event">KRUHÁČ-štíhlá linie</span>
-
-                        <span class="schedule-time">18:00 - 19:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div>
-
-                </div>
+                foreach ($tags as $index => $tag) {
+                    // Query pro získání příspěvků s daným tagem
+                    $args = array(
+                        'post_type' => 'post',
+                        'tag' => $tag,
+                        'posts_per_page' => -1,
+                    );
                 
-                <!-- <div id="schedule-tuesday" class="schedule-content">
-
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Péťa</span>
-
-                        <span class="schedule-event">PEVNÉ TĚLO</span>
-
-                        <span class="schedule-time">18:00 - 19:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div>
-
-                </div> -->
+                    $query = new WP_Query($args);
                 
-                <div id="schedule-wednesday" class="schedule-content">
-
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Péťa</span>
-
-                        <span class="schedule-event">PEVNÉ TĚLO</span>
-
-                        <span class="schedule-time">18:00 - 19:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div>
-
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Péťa</span>
-
-                        <span class="schedule-event">PEVNÉ TĚLO</span>
-
-                        <span class="schedule-time">18:00 - 19:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div>
-
-                </div>
+                    // Přidáme třídu "active" pro tag "pondeli"
+                    $class = ($index === 0 && $tag === 'pondeli') ? 'schedule-content active' : 'schedule-content';
                 
-                <div id="schedule-thursday" class="schedule-content">
-
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Michal</span>
-
-                        <span class="schedule-event">KRUHÁČ - štíhlá linie</span>
-
-                        <span class="schedule-time">19:00 - 20:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div>
-
-                </div>
+                    // Vytvoříme div s příslušným id a class
+                    echo '<div id="schedule-' . esc_attr($tag) . '" class="' . esc_attr($class) . '">';
                 
-                <div id="schedule-friday" class="schedule-content">
+                    // Pokud jsou příspěvky k dispozici, projdeme je a vypíšeme
+                    if ($query->have_posts()) {
+                        while ($query->have_posts()) {
+                            $query->the_post();
 
-                    <div class="schedule-cart">
+                            $trainers_tags_count = get_theme_mod('trainers_tags_count');
+                            $name_tags = array();
 
-                        <span class="schedule-name">Michal</span>
+                            for ($i = 1; $i <= $trainers_tags_count; $i++) {
+                                $setting_name = "trainers_tags_name$i";
+                                $name_tags[] = get_theme_mod($setting_name);
+                            }
+                            
+                            $post_tags = wp_get_post_tags(get_the_ID(), array('fields' => 'slugs'));                    
+                            // Zde jsou tagy, které jsou přítomné v aktuálním příspěvku
+                            $matching_tags = array_intersect($name_tags, $post_tags);
 
-                        <span class="schedule-event">KRUHÁČ - štíhlá linie</span>
+                            $other_tags = array_diff($post_tags, $name_tags, $tags);
 
-                        <span class="schedule-time">19:00 - 20:00</span>
+                            
+                            echo '<div class="schedule-cart">';
 
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
+                            if (!empty($matching_tags)) {
+                                foreach ($matching_tags as $tag) {
+                                    echo '<span class="schedule-name">';
+                                    if ($tag == 'peta') {
+                                        echo 'Péťa';
+                                    } else {
+                                        echo esc_html($tag);
+                                    }
+                                    echo '</span>';
+                                }
+                            }
+                           
 
-                    </div> 
+                            echo '<span class="schedule-event">' . get_the_title() . '</span>';
+                            
+                            if (!empty($other_tags)) {
+                                echo '<span class="schedule-time">'; 
+                                foreach ($other_tags as $other_tag) {
+                                    echo esc_html($other_tag) . ' ';
+                                }
+                                echo '</span>';
+                            }    
+                            echo '<a href="' . esc_url(get_permalink()) . '" class="btn accent-btn shadow schedule-btn">Zjistit více</a>';
+                            
+                            echo '</div>';
+                        }
+                    } else {
+                        // Pokud žádné příspěvky nemají daný tag, zobrazíme zprávu
+                        echo '<p>Dnes nejsou žádné lekce</p>';
+                    }
+                
+                    echo '</div>';
+                
+                    // Obnovíme data postu
+                    wp_reset_postdata();
+                
+                } ?>
+                
+                
+                            </div>
+                
+                        </div>
+                
+                    </section>
                     
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Michal</span>
-
-                        <span class="schedule-event">KRUHÁČ - štíhlá linie</span>
-
-                        <span class="schedule-time">19:00 - 20:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div> 
-
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Michal</span>
-
-                        <span class="schedule-event">KRUHÁČ - štíhlá linie</span>
-
-                        <span class="schedule-time">19:00 - 20:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div> 
-
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Péťa</span>
-
-                        <span class="schedule-event">BODYFORMING</span>
-
-                        <span class="schedule-time">10:00 – 11:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div>
-
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Péťa</span>
-
-                        <span class="schedule-event">BODYFORMING</span>
-
-                        <span class="schedule-time">10:00 – 11:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div>
-
-                </div>
+                    <?php
+                    return ob_get_clean();
+                }
                 
-                <div id="schedule-saturday" class="schedule-content">
-
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Péťa</span>
-
-                        <span class="schedule-event">BODYFORMING</span>
-
-                        <span class="schedule-time">10:00 – 11:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div>
-
-                </div>
-                
-                <div id="schedule-sunday" class="schedule-content">
-
-                    <div class="schedule-cart">
-
-                        <span class="schedule-name">Péťa</span>
-
-                        <span class="schedule-event">PEVNÉ TĚLO</span>
-
-                        <span class="schedule-time">19:00 – 20:00</span>
-
-                        <a href="#" class="btn accent-btn shadow schedule-btn">Zjistit více</a>
-
-                    </div>                
-
-                </div>
-            
-            </div>
-
-        </div>
-
-    </section>
-    
-    <?php
-    return ob_get_clean();
-} ;
 add_shortcode('show_schedule', 'display_schedule_shortcode');
+
+// home url
+ function display_home_url_shortcode() {
+    return home_url();
+ };
+
+ add_shortcode('home_url', 'display_home_url_shortcode');

@@ -1,5 +1,3 @@
-console.log('Hello Wordpress');
-
 /** hamburger menu */
 const menuBtn = document.querySelector('.menu-btn');
 let menuOpen = false;
@@ -144,8 +142,6 @@ scheduleControls.addEventListener('click', function(event) {
       applyLastOddClass(activeScheduleContent);
   }
 });
-
-
 
 /*
 * Swiper 

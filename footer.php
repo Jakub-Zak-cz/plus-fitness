@@ -53,7 +53,7 @@
 
         <a target="_blank" id="need-trainers" href="<?php echo home_url() ; ?>/instruktori#need-instruktors">Hledáme nové instruktory</a>
 
-        <a target="_blank" id="contract" href="<?php echo home_url() ; ?>/provozni-rad-a-obchodni-podminky">Provozní řád a obchodní podmínky</a>
+        <a id="contract" href="<?php echo home_url() ; ?>/provozni-rad-a-obchodni-podminky">Provozní řád a obchodní podmínky</a>
       
       </div>
     

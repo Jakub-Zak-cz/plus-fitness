@@ -39,7 +39,6 @@
 
             ?>
 
-            <li><a href="#footer-nav">Kontakt</a></li>
 
         </ul>
     </nav>

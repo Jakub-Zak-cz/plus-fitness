@@ -214,97 +214,12 @@ body {
 
 
 /** reviews slider */
-.reviews {
-    padding: 180px 0;
-}
-
-.reviews-introduction {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 25px;
-    margin-bottom: 50px;
-}
-
-.reviews_title {
-    font-size: var(--headline);
-    text-align: center;
-}
-
-.reviews_paragraph {
-    text-align: center;
-    max-width: 75ch;
-}
-
-.reviews_paragraph a {
-    color: var(--accent-color);
-}
-
-.review {
-    display: flex!important;
-    width: 100%!important;
-    padding: 80px 116px;
-    align-items: flex-start;
-    gap: 20px;
-    border-radius: 30px;
-    background: var(--black-bg);
-}
-
-.reviews_text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 30px;
-}
-
-.reviews_text p {
-    font-size: var(--body-text);
-    text-align: initial;
-}
-
-.reviews-headline {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    width: 100%;
-}
-
-.reviews-headline h3 {
-    font-size: var(--middle-text);
-}
-
-.review-figure {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-}
-
-.reviews-approval {
-    flex-shrink: 0!important;
-    width: 40px!important;
-    height: 42.817px!important;
-    display: inline-block !important;
-    border-radius: 0 !important;
-    position: relative;
-}
-
-.review-figure figcaption {
-    font-size: var(--body-text);
-    display: inline;
-}
-
 .reviews-pagination {
     color: var(--accent-color);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-}
-
-.review-responsive {
-    display: none !important;
 }
 
 .swiper-pagination-bullet {
@@ -621,6 +536,7 @@ body {
 
 .schedule-name {
     font-size: var(--middle-text);
+    text-transform: capitalize;
 }
 
 .schedule-event {
@@ -658,7 +574,7 @@ body {
     flex-direction: column;
 }
 
-.schedule-trainer_section img {
+.schedule-trainer_section img,.schedule-text_responsive-img {
     width: 280px;
     height: 380px;
 }
@@ -692,6 +608,10 @@ body {
 .schedule-text_container .btn {
     padding: 15px 35px;
     width: 250px;
+}
+
+.schedule-text_responsive-h3, .schedule-trainer_section h3 {
+    text-transform: capitalize;
 }
 
 .schedule-text_responsive-img, .schedule-text_responsive-h3{
@@ -822,11 +742,11 @@ body {
     border: 2px solid var(--main-color);
 }
 
-#group-training {
+#group-training, #group-training-student {
     position: relative;
 }
 
-#group-training::before {
+#group-training::before, #group-training-student:before {
     content: "*Skupinová cvičení je možné hradit také z benefitní karty Multisport.";
     position: absolute;
     bottom: 2px; 
@@ -988,7 +908,6 @@ body {
 
 .more p {
     padding: 35px 25px 25px 25px;
-    text-align: justify;
 }
 
 .lesson.l-active .lesson-arrow {
@@ -1012,7 +931,7 @@ body {
 
 /** instruktor section code */
 .instruktors {
-    padding: 180px 0;
+    padding: 120px 0;
 }
 
 .instruktors .container {
@@ -1062,6 +981,16 @@ body {
 .instruktor-right .instruktor-img {
     order: 2;
 }
+
+/**
+ * get back
+ */
+.get-back {
+    display: block;
+    font-size: var(--visible-b-text);
+    margin-bottom: 120px;
+}
+
 
 /** footer */
 footer {
@@ -1155,6 +1084,12 @@ footer .container {
 
 .trainer {
     padding: 0 20px;
+}
+
+/** special footers */
+.order-footer {
+    padding: 20px 0;
+    background: none;
 }
 
 /** styles for posts pages*/
@@ -1323,7 +1258,7 @@ footer .container {
 
     /** instruktors */
     .lesson.l-active .more {
-        overflow-y: auto;
+        max-height: 350px;
     }
 }
 
@@ -1340,134 +1275,14 @@ footer .container {
     .last-odd {
         max-width: 500px !important;
     } 
+
+    .lesson.l-active .more {
+        max-height: 600px;
+    }
 }
 
 /** media queries */
 @media (max-width: 900px) {
-    
-    /** about-us */
-    .main_about-us .container {
-        flex-direction: column;
-        gap: 50px;
-    }
-
-    .about-us_text {
-        width: 100%;
-    }
-
-    .about-us_image {
-        width: 100%;
-    }
-
-    /** slider trainers */
-    .trainers-image-wrapper:hover, .trainers-image-wrapper:active > .trainers-image-showup {
-        top: 0; 
-    }
-
-    /** slider reviews*/
-    .reviews_slider {
-        display: none !important; 
-    }
-
-    .review-responsive {
-        display: flex !important;
-    } 
-
-    .review {
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 10px 50px;
-    }
-
-    .reviews-headline {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-
-    /** gallery */
-    .trainer {
-        padding: 0 60px;
-    }
-
-    /** schedule */
-
-    .schedule-control_toggle {
-        font-size: var(--visible-b-text);
-        padding: 10px 15px;
-        width: 16%;
-    }
-
-    /** schedule post */ 
-    .schedule_article {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .schedule_article-container, .schedule-trainer_section {
-        padding-bottom: unset;
-        padding-top: unset;
-    }
-
-    .schedule-trainer_section {
-        display: none;
-    }
-
-    .schedule_article-container {
-        width: 90%;
-        border-right: unset;
-        padding-left: unset;
-        padding-right: unset;
-        margin: 0 auto;
-        margin-top: 15vh;
-    }
-
-    .schedule-text_responsive-img, .schedule-text_responsive-h3{
-        display: unset;
-    }
-
-    .schedule-text_responsive-h3 {
-        margin-top: 25px;
-    }
-
-    .schedule-text_container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        margin-top: 50px;
-    }
-
-    .schedule-text_container .btn {
-        margin-bottom: 100px;
-    }
-
-    /** footer */
-    footer .container {
-        flex-direction: column;
-        gap: 30px;
-        align-items: flex-start;
-        justify-content: flex-start;
-    }
-
-    .footer-item {
-        width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    
-    /** root */
-    :root {
-       /** typography */
-        --title : 50px;
-        --headline : 30px;
-        --middle-text : 26px;
-        --visible-b-text : 18px;
-        --body-text : 16px; 
-    }
 
     /** menu */
     #primary-header {
@@ -1576,6 +1391,109 @@ footer .container {
         height: 1px !important;
         background-color: var(--secondary-color) !important;
     }
+    
+    /** about-us */
+    .main_about-us .container {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .about-us_text {
+        width: 100%;
+    }
+
+    .about-us_image {
+        width: 100%;
+    }
+
+    /** slider trainers */
+    .trainers-image-wrapper:hover, .trainers-image-wrapper:active > .trainers-image-showup {
+        top: 0; 
+    }
+    
+
+    /** gallery */
+    .trainer {
+        padding: 0 60px;
+    }
+
+    /** schedule */
+
+    .schedule-control_toggle {
+        font-size: var(--visible-b-text);
+        padding: 10px 15px;
+        width: 16%;
+    }
+
+    /** schedule post */ 
+    .schedule_article {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .schedule_article-container, .schedule-trainer_section {
+        padding-bottom: unset;
+        padding-top: unset;
+    }
+
+    .schedule-trainer_section {
+        display: none;
+    }
+
+    .schedule_article-container {
+        width: 90%;
+        border-right: unset;
+        padding-left: unset;
+        padding-right: unset;
+        margin: 0 auto;
+        margin-top: 15vh;
+    }
+
+    .schedule-text_responsive-img, .schedule-text_responsive-h3{
+        display: unset;
+    }
+
+    .schedule-text_responsive-h3 {
+        margin-top: 25px;
+    }
+
+    .schedule-text_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 50px;
+    }
+
+    .schedule-text_container .btn {
+        margin-bottom: 100px;
+    }
+
+    /** footer */
+    footer .container {
+        flex-direction: column;
+        gap: 30px;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .footer-item {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    
+    /** root */
+    :root {
+       /** typography */
+        --title : 50px;
+        --headline : 30px;
+        --middle-text : 26px;
+        --visible-b-text : 18px;
+        --body-text : 16px; 
+    }
 
     /** hero */
     .intruktors-undertitle {
@@ -1599,6 +1517,10 @@ footer .container {
 
     .accent-price-block {
         margin-right: unset;
+    }
+
+    .lesson.l-active .more {
+        max-height: 900px;
     }
 
 }
@@ -1675,7 +1597,7 @@ footer .container {
     }
 
     /** section paddings */
-    .reviews, .fitness-gallery, .why-us, .main_about-us, .price-list,
+    .fitness-gallery, .why-us, .main_about-us, .price-list,
     .instruktors {
         padding: 50px 0;
     }
@@ -1733,19 +1655,6 @@ footer .container {
 
     .why {
         width: 100%;
-    }
-
-    /** reviews slider */
-    .review-figure {
-        display: none;
-    }
-
-    .review-responsive {
-        height: fit-content;
-    }
-
-    .review {
-        padding: 60px 10px;
     }
 
     /** price list */
